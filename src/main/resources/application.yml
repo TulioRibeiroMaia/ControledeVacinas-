@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/vacinpb
+    username: admin
+    password:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
