@@ -3,9 +3,11 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/vacinpb
     username: admin
-    password:
+    password: admin
   jpa:
     database: postgresql
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true
+server:
+  port: 8081
