@@ -2,7 +2,7 @@ package uol.compass.vacinpb.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import uol.compass.vacinpb.entity.enums.UserRole;
+import uol.compass.vacinpb.enums.UserRole;
 
 import java.time.LocalDate;
 

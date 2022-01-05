@@ -2,7 +2,7 @@ package uol.compass.vacinpb.dto;
 
 import lombok.Data;
 import uol.compass.vacinpb.entity.Employee;
-import uol.compass.vacinpb.entity.enums.State;
+import uol.compass.vacinpb.enums.State;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package uol.compass.vacinpb.dto.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import uol.compass.vacinpb.entity.enums.VaccineName;
+import uol.compass.vacinpb.enums.VaccineName;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

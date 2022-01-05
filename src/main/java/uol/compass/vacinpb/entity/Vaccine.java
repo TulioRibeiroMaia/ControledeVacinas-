@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uol.compass.vacinpb.entity.enums.VaccineName;
+import uol.compass.vacinpb.enums.VaccineName;
+
 
 import javax.persistence.*;
 import java.time.LocalDate;

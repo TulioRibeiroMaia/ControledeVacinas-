@@ -2,7 +2,7 @@ package uol.compass.vacinpb.dto.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.br.CPF;
-import uol.compass.vacinpb.entity.enums.UserRole;
+import uol.compass.vacinpb.enums.UserRole;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

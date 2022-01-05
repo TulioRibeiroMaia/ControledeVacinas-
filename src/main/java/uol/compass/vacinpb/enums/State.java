@@ -1,4 +1,4 @@
-package uol.compass.vacinpb.entity.enums;
+package uol.compass.vacinpb.enums;
 
 public enum State {
     AC,

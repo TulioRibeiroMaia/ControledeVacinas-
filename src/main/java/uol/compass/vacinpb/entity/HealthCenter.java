@@ -3,7 +3,7 @@ package uol.compass.vacinpb.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uol.compass.vacinpb.entity.enums.State;
+import uol.compass.vacinpb.enums.State;
 
 import javax.persistence.*;
 import java.util.List;
