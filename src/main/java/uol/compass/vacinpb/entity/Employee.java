@@ -1,10 +1,13 @@
-package uol.compass.vacinpb.Entity;
+package uol.compass.vacinpb.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
@@ -12,9 +15,11 @@ import javax.persistence.Entity;
 @Entity
 public class Employee extends User{
 
-    private String cnes;
-
     private String email;
 
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "hc_cnes")
+    private HealthCenter healthCenter;
 }

@@ -1,4 +1,4 @@
-package uol.compass.vacinpb.Entity;
+package uol.compass.vacinpb.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

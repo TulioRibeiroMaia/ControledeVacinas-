@@ -1,7 +1,7 @@
-package uol.compass.vacinpb.Entity;
+package uol.compass.vacinpb.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import uol.compass.vacinpb.Enums.Role;
+import uol.compass.vacinpb.entity.enums.UserRole;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,5 +19,5 @@ public abstract class User {
     public LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
-    public Role role;
+    public UserRole userRole;
 }

@@ -1,4 +1,4 @@
-package uol.compass.vacinpb.Enums;
+package uol.compass.vacinpb.entity.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,14 +1,12 @@
-package uol.compass.vacinpb.Entity;
+package uol.compass.vacinpb.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uol.compass.vacinpb.Enums.State;
+import uol.compass.vacinpb.entity.enums.State;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,5 +24,6 @@ public class HealthCenter {
     @Enumerated(EnumType.STRING)
     private State state;
 
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "healthCenter", cascade = CascadeType.ALL)
+    private List<Employee> employees;
 }

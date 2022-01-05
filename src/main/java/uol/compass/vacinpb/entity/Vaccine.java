@@ -1,14 +1,12 @@
-package uol.compass.vacinpb.Entity;
+package uol.compass.vacinpb.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uol.compass.vacinpb.Enums.VaccineName;
+import uol.compass.vacinpb.entity.enums.VaccineName;
 
 import javax.persistence.*;
-
-import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Data
@@ -16,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 public class Vaccine {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,5 +30,5 @@ public class Vaccine {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate expirationDate;
 
-    private BigInteger lotNumber;
+    private String lotNumber;
 }
