@@ -45,8 +45,6 @@ public enum VaccineName {
                 return vaccineName;
             }
         }
-
         return null;
     }
-
 }

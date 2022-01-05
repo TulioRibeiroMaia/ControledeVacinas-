@@ -21,7 +21,7 @@ public class Vaccine {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private VaccineName name;
+    private VaccineName vaccineName;
 
     private String manufacturer;
 

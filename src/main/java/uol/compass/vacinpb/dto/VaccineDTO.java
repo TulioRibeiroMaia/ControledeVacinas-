@@ -11,7 +11,7 @@ public class VaccineDTO {
 
     private Long id;
 
-    private VaccineName name;
+    private VaccineName vaccineName;
 
     private String manufacturer;
 

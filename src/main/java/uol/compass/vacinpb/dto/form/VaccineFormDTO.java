@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class VaccineFormDTO {
 
     @NotNull
-    private VaccineName name;
+    private VaccineName vaccineName;
 
     @NotEmpty
     private String manufacturer;

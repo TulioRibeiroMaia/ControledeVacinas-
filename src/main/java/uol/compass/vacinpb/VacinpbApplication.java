@@ -9,5 +9,4 @@ public class VacinpbApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VacinpbApplication.class, args);
 	}
-
 }
