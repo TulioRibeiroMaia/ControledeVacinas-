@@ -9,6 +9,7 @@ import uol.compass.vacinpb.enums.VaccineName;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +33,7 @@ public class Vaccine {
     private LocalDate expirationDate;
 
     private String lotNumber;
+
+    @OneToMany(mappedBy = "vaccine")
+    private List<CitizenVaccines> vaccines;
 }

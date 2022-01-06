@@ -31,7 +31,6 @@ public class Citizen {
 
     private String cns;
 
-    @ManyToMany
-    private List<Vaccine> vaccines;
-
+    @OneToMany(mappedBy = "citizen")
+    private List<CitizenVaccines> vaccines;
 }
