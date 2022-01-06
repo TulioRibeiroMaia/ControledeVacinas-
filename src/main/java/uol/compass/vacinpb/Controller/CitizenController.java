@@ -10,7 +10,6 @@ import uol.compass.vacinpb.dto.form.CitizenFormDTO;
 import uol.compass.vacinpb.dto.form.VaccineRecordFormDTO;
 import uol.compass.vacinpb.service.CitizenService;
 
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;

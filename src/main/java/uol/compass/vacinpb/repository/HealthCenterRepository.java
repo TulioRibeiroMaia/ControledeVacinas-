@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface HealthCenterRepository extends JpaRepository<HealthCenter, Long> {
 
+    Optional<HealthCenter> findByCnes(String cnes);
+
     Optional<HealthCenter> findByName(String name);
 
     List<HealthCenter> findByCity(String city);
