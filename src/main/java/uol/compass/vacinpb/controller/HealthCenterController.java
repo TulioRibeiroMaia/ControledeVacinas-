@@ -1,4 +1,4 @@
-package uol.compass.vacinpb.Controller;
+package uol.compass.vacinpb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.HealthCenterDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
+import uol.compass.vacinpb.service.HealthCenterService;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -28,9 +29,9 @@ public class HealthCenterController {
 
     //lista os postos por nome, estado e cidade.
     @GetMapping
-    public ResponseEntity<List<HealthCenterDTO>> getHealthCenter(@RequestParam(required = false) String name, @RequestParam(required = false) String state,
+    public ResponseEntity<List<HealthCenterDTO>> getHealthCenters(@RequestParam(required = false) String name, @RequestParam(required = false) String state,
                                                                  @RequestParam(required = false) String city) {
-        List<HealthCenterDTO> healthCenter = this.service.getHealthCenter(name, state, city);
+        List<HealthCenterDTO> healthCenter = this.service.getHealthCenters(name, state, city);
         return ResponseEntity.ok(healthCenter);
     }
 

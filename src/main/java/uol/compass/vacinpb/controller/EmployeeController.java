@@ -1,4 +1,4 @@
-package uol.compass.vacinpb.Controller;
+package uol.compass.vacinpb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.EmployeeDTO;
 import uol.compass.vacinpb.dto.form.EmployeeFormDTO;
 import uol.compass.vacinpb.dto.form.EmployerRegistrationFormDTO;
+import uol.compass.vacinpb.service.EmployeeService;
 
 
 import javax.transaction.Transactional;
@@ -38,8 +39,8 @@ public class EmployeeController {
 
     //lista os empregados com filtro por nome.
     @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> getEmployee(@RequestParam(required = false) String name) {
-        List<EmployeeDTO> employee = this.service.getEmployee(name);
+    public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(required = false) String name) {
+        List<EmployeeDTO> employee = this.service.getEmployees(name);
         return ResponseEntity.ok(employee);
     }
 

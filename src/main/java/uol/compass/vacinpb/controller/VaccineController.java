@@ -1,4 +1,4 @@
-package uol.compass.vacinpb.Controller;
+package uol.compass.vacinpb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.VaccineDTO;
 import uol.compass.vacinpb.dto.form.VaccineFormDTO;
+import uol.compass.vacinpb.service.VaccineService;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -28,9 +29,9 @@ public class VaccineController {
 
     //lista as vacinas por nome,fabricante e número do lote.
     @GetMapping
-    public ResponseEntity<List<VaccineDTO>> getVaccine(@RequestParam(required = false) String name, @RequestParam(required = false) String manufacturer,
+    public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(required = false) String name, @RequestParam(required = false) String manufacturer,
                                                        @RequestParam(required = false) String lotNumber) {
-        List<VaccineDTO> vaccine = this.service.getVaccine(name);
+        List<VaccineDTO> vaccine = this.service.getVaccines(name, manufacturer, lotNumber);
         return ResponseEntity.ok(vaccine);
     }
 
