@@ -15,4 +15,5 @@ public interface CitizenRepository extends JpaRepository<Citizen, Long> {
 
     List<Citizen> findByAge(LocalDate birthDate);
 
+    void deleteByCpf(String cpf);
 }
