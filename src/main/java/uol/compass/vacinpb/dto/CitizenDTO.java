@@ -20,5 +20,5 @@ public class CitizenDTO implements Serializable {
 
     private String cns;
 
-    private List<Vaccine> vaccines;
+    private List<VaccineRecordDTO> vaccines;
 }

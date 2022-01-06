@@ -17,5 +17,5 @@ public class HealthCenterDTO {
 
     private State state;
 
-    private List<Employee> employees;
+    private List<EmployeeDTO> employees;
 }
