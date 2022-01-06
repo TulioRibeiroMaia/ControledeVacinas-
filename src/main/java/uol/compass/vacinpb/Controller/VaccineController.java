@@ -26,9 +26,10 @@ public class VaccineController {
         return new ResponseEntity<>(vaccine, HttpStatus.CREATED);
     }
 
-    //lista as vacinas por nome. (Ainda precisa implementar os filtros por fabricante e número do lote)
+    //lista as vacinas por nome,fabricante e número do lote.
     @GetMapping
-    public ResponseEntity<List<VaccineDTO>> getVaccine(@RequestParam(required = false) String name) {
+    public ResponseEntity<List<VaccineDTO>> getVaccine(@RequestParam(required = false) String name, @RequestParam(required = false) String manufacturer,
+                                                       @RequestParam(required = false) String lotNumber) {
         List<VaccineDTO> vaccine = this.service.getVaccine(name);
         return ResponseEntity.ok(vaccine);
     }

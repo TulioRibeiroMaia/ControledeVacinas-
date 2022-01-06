@@ -26,10 +26,11 @@ public class HealthCenterController {
         return new ResponseEntity<>(healthCenter, HttpStatus.CREATED);
     }
 
-    //lista os postos por nome. (Ainda precisa implementar os filtros por estado e cidade)
+    //lista os postos por nome, estado e cidade.
     @GetMapping
-    public ResponseEntity<List<HealthCenterDTO>> getHealthCenter(@RequestParam(required = false) String name) {
-        List<HealthCenterDTO> healthCenter = this.service.getHealthCenter(name);
+    public ResponseEntity<List<HealthCenterDTO>> getHealthCenter(@RequestParam(required = false) String name, @RequestParam(required = false) String state,
+                                                                 @RequestParam(required = false) String city) {
+        List<HealthCenterDTO> healthCenter = this.service.getHealthCenter(name, state, city);
         return ResponseEntity.ok(healthCenter);
     }
 
