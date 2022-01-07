@@ -19,6 +19,9 @@ import java.util.List;
 public class Citizen {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
     public String name;

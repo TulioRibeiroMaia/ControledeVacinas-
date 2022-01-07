@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cidadão")
+@RequestMapping("/cidadaos")
 public class CitizenController {
 
     @Autowired

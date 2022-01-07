@@ -24,6 +24,5 @@ public class CitizenFormDTO {
     @Size(min = 15, max = 15, message = "Tamanho inválido")
     private String cns;
 
-    @NotNull
     private UserRole userRole;
 }

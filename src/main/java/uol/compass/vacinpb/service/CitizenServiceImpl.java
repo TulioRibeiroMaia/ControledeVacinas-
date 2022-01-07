@@ -4,9 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uol.compass.vacinpb.dto.CitizenDTO;
+import uol.compass.vacinpb.dto.VaccineRecordDTO;
 import uol.compass.vacinpb.dto.form.CitizenFormDTO;
+import uol.compass.vacinpb.dto.form.VaccineRecordFormDTO;
 import uol.compass.vacinpb.entity.Citizen;
+import uol.compass.vacinpb.entity.Vaccine;
 import uol.compass.vacinpb.repository.CitizenRepository;
+import uol.compass.vacinpb.repository.VaccineRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +33,7 @@ public class CitizenServiceImpl implements CitizenService {
     }
 
     @Override
-    public List<CitizenDTO> getCitizens() {
+    public List<CitizenDTO> getCitizens(String name) {
         List<Citizen> citizens = this.citizenRepository.findAll();
 
         return citizens
@@ -78,5 +82,10 @@ public class CitizenServiceImpl implements CitizenService {
 
         // substituir pela exceção específica assim que implementar o handler
         throw new RuntimeException("Resource Not Found Exception");
+    }
+
+    @Override
+    public VaccineRecordDTO addVaccine(VaccineRecordFormDTO body) {
+        return null;
     }
 }

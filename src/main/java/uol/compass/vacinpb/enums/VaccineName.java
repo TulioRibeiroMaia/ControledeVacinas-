@@ -5,27 +5,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum VaccineName {
-    BCG("bcg"),
-    HEPATITE_B("hepatite b"),
-    PENTAVALENTE("pentavalente"),
-    POLIOMELITE("poliomelite"),
-    PNEUMOCÓCICA("pneumocócica"),
-    ROTAVÍRUS("rotavírus"),
-    MENINGOCÓCICA_C("meningocócica c"),
-    INFLUENZA("influenza"),
-    FEBRE_AMARELA("febre amarela"),
-    TRIPLICE_VIRAL("triplice viral"),
-    DTP("dtp"),
-    HEPATITE_A("hepatite a"),
-    TETRA_VIRAL("tetra viral"),
-    VARICELA_ATENUADA("varicela atenuada"),
-    HPV("hpv"),
-    DT("dt"),
-    DTPA("dtpa"),
-    PFIZER("pfizer"),
-    CORONAVAC("coronavac"),
-    JANSSEN("janssen"),
-    ASTRAZENECA("astrazeneca");
+    BCG("BCG"),
+    HEPATITE_B("Hepatite B"),
+    PENTAVALENTE("Pentavalente"),
+    POLIOMELITE("Poliomelite"),
+    PNEUMOCOCICA("Pneumocócica"),
+    ROTAVIRUS("Rotavírus"),
+    MENINGOCOCICA_C("Meningocócica C"),
+    INFLUENZA("Influenza"),
+    FEBRE_AMARELA("Febre Amarela"),
+    TRIPLICE_VIRAL("Tríplice Viral"),
+    DTP("DTP"),
+    HEPATITE_A("Hepatite A"),
+    TETRA_VIRAL("Tetra Viral"),
+    VARICELA_ATENUADA("Varicela Atenuada"),
+    HPV("HPV"),
+    DT("DT"),
+    DTPA("DTPA"),
+    PFIZER("Pfizer"),
+    CORONAVAC("Coronavac"),
+    JANSSEN("Janssen"),
+    ASTRAZENECA("Astrazeneca");
 
     private String value;
 
@@ -39,7 +39,7 @@ public enum VaccineName {
     }
 
     @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-    public static VaccineName forValues(@JsonProperty("nome vacina") String value) {
+    public static VaccineName forValues(@JsonProperty("nome_vacina") String value) {
         for (VaccineName vaccineName : VaccineName.values()) {
             if (vaccineName.value.equalsIgnoreCase(value)) {
                 return vaccineName;

@@ -12,4 +12,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByCpf(String cpf);
 
     Optional<Employee> findByName(String name);
+
+    void deleteByCpf(String cpf);
 }

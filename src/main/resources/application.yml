@@ -9,5 +9,7 @@ spring:
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 server:
   port: 8081

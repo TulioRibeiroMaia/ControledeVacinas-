@@ -13,7 +13,7 @@ public interface CitizenRepository extends JpaRepository<Citizen, Long> {
 
     Optional<Citizen> findByName(String name);
 
-    List<Citizen> findByAge(LocalDate birthDate);
+    List<Citizen> findByBirthDate(LocalDate birthDate);
 
     void deleteByCpf(String cpf);
 }
