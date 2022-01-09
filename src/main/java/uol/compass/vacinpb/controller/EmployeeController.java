@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/funcionários")
+@RequestMapping("/funcionarios")
 public class EmployeeController {
 
     @Autowired
@@ -30,17 +30,17 @@ public class EmployeeController {
     }
 
     //registra um novo empregado em um posto(UBS)
-    @PostMapping("/postos")
+    @PostMapping("/{cpf}/unidades")
     @Transactional
-    public ResponseEntity<EmployeeDTO> registerEmployee(@RequestBody @Valid EmployerRegistrationFormDTO body) {
-        EmployeeDTO employeeRegistered = this.service.registerEmployee(body);
+    public ResponseEntity<EmployeeDTO> registerEmployee(@PathVariable String cpf, @RequestBody @Valid EmployerRegistrationFormDTO body) {
+        EmployeeDTO employeeRegistered = this.service.registerEmployee(cpf, body);
         return ResponseEntity.ok(employeeRegistered);
     }
 
     //lista os empregados com filtro por nome.
     @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(required = false) String name) {
-        List<EmployeeDTO> employee = this.service.getEmployees(name);
+    public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(required = false) String fullName) {
+        List<EmployeeDTO> employee = this.service.getEmployees(fullName);
         return ResponseEntity.ok(employee);
     }
 

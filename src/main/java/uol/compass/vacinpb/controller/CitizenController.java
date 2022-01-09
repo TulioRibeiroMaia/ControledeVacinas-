@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.CitizenDTO;
-import uol.compass.vacinpb.dto.VaccineRecordDTO;
+import uol.compass.vacinpb.dto.CitizenVaccinesDTO;
 import uol.compass.vacinpb.dto.form.CitizenFormDTO;
-import uol.compass.vacinpb.dto.form.VaccineRecordFormDTO;
+import uol.compass.vacinpb.dto.form.CitizenVaccinesFormDTO;
 import uol.compass.vacinpb.service.CitizenService;
 
 import javax.transaction.Transactional;
@@ -21,7 +21,7 @@ public class CitizenController {
     @Autowired
     private CitizenService service;
 
-    //cadastra novos cidadôes
+    //cadastra novos cidadãos
     @PostMapping
     @Transactional
     public ResponseEntity<CitizenDTO> saveCitizen(@RequestBody @Valid CitizenFormDTO body) {
@@ -29,17 +29,17 @@ public class CitizenController {
         return new ResponseEntity<>(citizen, HttpStatus.CREATED);
     }
 
-    @PostMapping("/vacinas")
+    @PostMapping("/{cpf}/vacinas")
     @Transactional
-    public ResponseEntity<VaccineRecordDTO> addVaccine(@RequestBody @Valid VaccineRecordFormDTO body) {
-        VaccineRecordDTO citizenVaccine = this.service.addVaccine(body);
+    public ResponseEntity<CitizenVaccinesDTO> addVaccine(@PathVariable String cpf, @RequestBody @Valid CitizenVaccinesFormDTO body) {
+        CitizenVaccinesDTO citizenVaccine = this.service.addVaccine(cpf, body);
         return ResponseEntity.ok(citizenVaccine);
     }
 
-    //lista os cidadões com filtro por nome. (Falta implementar o filtro por idade)
+    //lista os cidadãos com filtro por nome. (Falta implementar o filtro por idade)
     @GetMapping
-    public ResponseEntity<List<CitizenDTO>> getCitizen(@RequestParam(required = false) String name) {
-        List<CitizenDTO> citizen = this.service.getCitizens(name);
+    public ResponseEntity<List<CitizenDTO>> getCitizen(@RequestParam(name = "nome", required = false) String fullName) {
+        List<CitizenDTO> citizen = this.service.getCitizens(fullName);
         return ResponseEntity.ok(citizen);
     }
 

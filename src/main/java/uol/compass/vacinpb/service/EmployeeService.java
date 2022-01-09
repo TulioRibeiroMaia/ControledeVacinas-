@@ -18,5 +18,5 @@ public interface EmployeeService {
 
     EmployeeDTO deleteEmployee(String cpf);
 
-    EmployeeDTO registerEmployee(EmployerRegistrationFormDTO body);
+    EmployeeDTO registerEmployee(String cpf, EmployerRegistrationFormDTO body);
 }

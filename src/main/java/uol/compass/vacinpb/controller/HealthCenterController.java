@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/postos")
+@RequestMapping("/unidades")
 public class HealthCenterController {
 
     @Autowired

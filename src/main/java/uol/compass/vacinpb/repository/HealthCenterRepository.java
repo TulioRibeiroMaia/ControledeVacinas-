@@ -15,6 +15,4 @@ public interface HealthCenterRepository extends JpaRepository<HealthCenter, Long
     List<HealthCenter> findByCity(String city);
 
     List<HealthCenter> findByState(String state);
-
-    void deleteByCnes(String cnes);
 }

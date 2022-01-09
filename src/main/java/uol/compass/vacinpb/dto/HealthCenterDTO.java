@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 public class HealthCenterDTO {
 
+    private Long id;
+
     private String cnes;
 
     private String name;
@@ -16,6 +18,4 @@ public class HealthCenterDTO {
     private String city;
 
     private State state;
-
-    private List<EmployeeDTO> employees;
 }

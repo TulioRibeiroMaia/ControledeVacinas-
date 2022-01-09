@@ -1,9 +1,9 @@
 package uol.compass.vacinpb.service;
 
 import uol.compass.vacinpb.dto.CitizenDTO;
-import uol.compass.vacinpb.dto.VaccineRecordDTO;
+import uol.compass.vacinpb.dto.CitizenVaccinesDTO;
 import uol.compass.vacinpb.dto.form.CitizenFormDTO;
-import uol.compass.vacinpb.dto.form.VaccineRecordFormDTO;
+import uol.compass.vacinpb.dto.form.CitizenVaccinesFormDTO;
 
 import java.util.List;
 
@@ -19,5 +19,5 @@ public interface CitizenService {
 
     CitizenDTO deleteCitizen(String cpf);
 
-    VaccineRecordDTO addVaccine(VaccineRecordFormDTO body);
+    CitizenVaccinesDTO addVaccine(String cpf, CitizenVaccinesFormDTO body);
 }

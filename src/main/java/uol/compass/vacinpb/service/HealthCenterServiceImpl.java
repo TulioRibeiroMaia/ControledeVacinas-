@@ -74,7 +74,7 @@ public class HealthCenterServiceImpl implements HealthCenterService {
         Optional<HealthCenter> healthCenter = this.healthCenterRepository.findByCnes(cnes);
 
         if (healthCenter.isPresent()) {
-            this.healthCenterRepository.deleteByCnes(cnes);
+            this.healthCenterRepository.deleteById(healthCenter.get().getId());
             return modelMapper.map(healthCenter.get(), HealthCenterDTO.class);
         }
 

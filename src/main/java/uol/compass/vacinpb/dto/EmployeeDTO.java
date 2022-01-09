@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @Data
 public class EmployeeDTO {
 
+    private Long id;
+
     private String cpf;
 
     private String name;

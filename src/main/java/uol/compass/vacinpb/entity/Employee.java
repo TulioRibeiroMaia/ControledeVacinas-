@@ -17,9 +17,13 @@ import java.time.LocalDate;
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String cpf;
 
-    public String name;
+    public String fullName;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     public LocalDate birthDate;
@@ -32,6 +36,6 @@ public class Employee {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "hc_cnes")
+    @JoinColumn(name = "id_healthCenter")
     private HealthCenter healthCenter;
 }

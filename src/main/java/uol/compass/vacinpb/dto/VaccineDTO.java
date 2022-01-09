@@ -15,6 +15,7 @@ public class VaccineDTO {
 
     private String manufacturer;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate manufactureDate;
 
     @JsonFormat(pattern = "dd/MM/yyyy")

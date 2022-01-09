@@ -2,9 +2,7 @@ package uol.compass.vacinpb.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import uol.compass.vacinpb.enums.UserRole;
 
 import javax.persistence.*;
@@ -12,26 +10,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Data
 public class Citizen {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "cpf", unique = true, nullable = false)
-    private String cpf;
-
-    public String name;
-
+    public String fullName;
     @JsonFormat(pattern = "dd/MM/yyyy")
     public LocalDate birthDate;
-
     @Enumerated(EnumType.STRING)
-    public UserRole userRole;
-
+    public UserRole userRole = UserRole.USUARIO;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
+    private String cpf;
     private String cns;
 
     @OneToMany(mappedBy = "citizen")

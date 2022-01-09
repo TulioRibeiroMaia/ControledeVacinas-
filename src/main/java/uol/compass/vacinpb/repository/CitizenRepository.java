@@ -11,9 +11,7 @@ public interface CitizenRepository extends JpaRepository<Citizen, Long> {
 
     Optional<Citizen> findByCpf(String cpf);
 
-    Optional<Citizen> findByName(String name);
+    Optional<Citizen> findByFullName(String fullName);
 
     List<Citizen> findByBirthDate(LocalDate birthDate);
-
-    void deleteByCpf(String cpf);
 }

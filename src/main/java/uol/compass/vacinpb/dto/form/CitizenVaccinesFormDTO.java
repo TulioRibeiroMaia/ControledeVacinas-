@@ -9,15 +9,12 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-public class VaccineRecordFormDTO {
-
-    @CPF
-    @NotBlank
-    private String citizenCpf;
+public class CitizenVaccinesFormDTO {
 
     @NotNull
     private Long vaccineId;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private LocalDate vaccinationDate;
 }
