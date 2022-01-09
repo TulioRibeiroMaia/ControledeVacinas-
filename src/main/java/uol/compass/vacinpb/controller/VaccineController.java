@@ -27,11 +27,11 @@ public class VaccineController {
         return new ResponseEntity<>(vaccine, HttpStatus.CREATED);
     }
 
-    //lista as vacinas por nome,fabricante e número do lote.
+    //lista as vacinas por nome e número do lote.
     @GetMapping
-    public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(required = false) String name, @RequestParam(required = false) String manufacturer,
-                                                       @RequestParam(required = false) String lotNumber) {
-        List<VaccineDTO> vaccine = this.service.getVaccines(name, manufacturer, lotNumber);
+    public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(name = "lote", required = false) String lotNumber,
+                                                        @RequestParam(name = "ordenar-validade", required = false) Boolean sortExpDate) {
+        List<VaccineDTO> vaccine = this.service.getVaccines(lotNumber, sortExpDate);
         return ResponseEntity.ok(vaccine);
     }
 

@@ -36,8 +36,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDTO> getEmployees(String name) {
-        List<Employee> employees = this.employeeRepository.findAll();
+    public List<EmployeeDTO> getEmployees(String fullName) {
+        List<Employee> employees;
+
+        if (fullName != null) {
+            employees = this.employeeRepository.findByFullNameIgnoreCaseContaining(fullName);
+        } else {
+            employees = this.employeeRepository.findAll();
+        }
 
         return employees
                 .stream()

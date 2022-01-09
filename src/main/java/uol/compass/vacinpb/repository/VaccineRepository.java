@@ -12,9 +12,5 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
 
     Optional<Vaccine> findById(Long id);
 
-    Optional<Vaccine> findByVaccineName(VaccineName vaccineName);
-
-    List<Vaccine> findByManufacturer(String manufacturer);
-
-    Optional<Vaccine> findByLotNumber(String lotNumber);
+    List<Vaccine> findByLotNumberIgnoreCase(String lotNumber);
 }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class CitizenDTO {
+public class CitizenWithVaccinesDTO {
 
     private Long id;
 
@@ -19,4 +19,6 @@ public class CitizenDTO {
     private LocalDate birthDate;
 
     private String cns;
+
+    private List<CitizenVaccinesDTO> vaccines;
 }

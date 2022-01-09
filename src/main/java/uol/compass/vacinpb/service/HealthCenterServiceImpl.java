@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uol.compass.vacinpb.dto.HealthCenterDTO;
 import uol.compass.vacinpb.dto.HealthCenterDTO;
+import uol.compass.vacinpb.dto.HealthCenterEmployeesDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.entity.HealthCenter;
+import uol.compass.vacinpb.enums.State;
 import uol.compass.vacinpb.repository.HealthCenterRepository;
 
 import java.util.List;
@@ -31,8 +33,19 @@ public class HealthCenterServiceImpl implements HealthCenterService {
     }
 
     @Override
-    public List<HealthCenterDTO> getHealthCenters(String name, String state, String city) {
-        List<HealthCenter> healthCenters = this.healthCenterRepository.findAll();
+    public List<HealthCenterDTO> getHealthCenters(String name, String stateStr, String city) {
+        List<HealthCenter> healthCenters;
+
+        if (name != null) {
+            healthCenters = this.healthCenterRepository.findByNameIgnoreCaseContaining(name);
+        } else if (stateStr != null) {
+            State state = State.valueOf(stateStr);
+            healthCenters = this.healthCenterRepository.findByState(state);
+        } else if (city != null) {
+            healthCenters = this.healthCenterRepository.findByCityIgnoreCaseContaining(city);
+        } else {
+            healthCenters = this.healthCenterRepository.findAll();
+        }
 
         return healthCenters
                 .stream()
@@ -76,6 +89,18 @@ public class HealthCenterServiceImpl implements HealthCenterService {
         if (healthCenter.isPresent()) {
             this.healthCenterRepository.deleteById(healthCenter.get().getId());
             return modelMapper.map(healthCenter.get(), HealthCenterDTO.class);
+        }
+
+        // substituir pela exceção específica assim que implementar o handler
+        throw new RuntimeException("Resource Not Found Exception");
+    }
+
+    @Override
+    public HealthCenterEmployeesDTO listHealthCenterEmployees(String cnes) {
+        Optional<HealthCenter> healthCenter = this.healthCenterRepository.findByCnes(cnes);
+
+        if (healthCenter.isPresent()) {
+            return modelMapper.map(healthCenter.get(), HealthCenterEmployeesDTO.class);
         }
 
         // substituir pela exceção específica assim que implementar o handler

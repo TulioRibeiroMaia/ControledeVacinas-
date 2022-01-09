@@ -11,5 +11,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     Optional<Employee> findByCpf(String cpf);
 
-    Optional<Employee> findByFullName(String fullName);
+    List<Employee> findByFullNameIgnoreCaseContaining(String fullName);
 }

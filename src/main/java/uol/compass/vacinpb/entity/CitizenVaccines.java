@@ -1,6 +1,8 @@
 package uol.compass.vacinpb.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,9 +19,11 @@ public class CitizenVaccines {
 
     @ManyToOne
     @JoinColumn(name = "citizen_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Citizen citizen;
 
     @ManyToOne
     @JoinColumn(name = "vaccine_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Vaccine vaccine;
 }

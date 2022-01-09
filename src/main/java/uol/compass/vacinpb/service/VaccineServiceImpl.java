@@ -10,6 +10,7 @@ import uol.compass.vacinpb.dto.form.VaccineFormDTO;
 import uol.compass.vacinpb.entity.Vaccine;
 import uol.compass.vacinpb.repository.VaccineRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,8 +32,18 @@ public class VaccineServiceImpl implements VaccineService {
     }
 
     @Override
-    public List<VaccineDTO> getVaccines(String name, String manufacturer, String lotNumber) {
-        List<Vaccine> vaccines = this.vaccineRepository.findAll();
+    public List<VaccineDTO> getVaccines(String lotNumber, Boolean sortExpDate) {
+        List<Vaccine> vaccines;
+
+        if (lotNumber == null) {
+            vaccines = this.vaccineRepository.findAll();
+        } else {
+            vaccines = this.vaccineRepository.findByLotNumberIgnoreCase(lotNumber);
+        }
+
+        if (Boolean.TRUE.equals(sortExpDate)) {
+            vaccines.sort(Comparator.comparing(Vaccine::getExpirationDate).reversed());
+        }
 
         return vaccines
                 .stream()

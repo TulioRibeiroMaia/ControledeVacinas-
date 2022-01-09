@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.HealthCenterDTO;
+import uol.compass.vacinpb.dto.HealthCenterEmployeesDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.service.HealthCenterService;
 
@@ -29,8 +30,9 @@ public class HealthCenterController {
 
     //lista os postos por nome, estado e cidade.
     @GetMapping
-    public ResponseEntity<List<HealthCenterDTO>> getHealthCenters(@RequestParam(required = false) String name, @RequestParam(required = false) String state,
-                                                                 @RequestParam(required = false) String city) {
+    public ResponseEntity<List<HealthCenterDTO>> getHealthCenters(@RequestParam(name = "nome", required = false) String name,
+                                                                  @RequestParam(name = "uf", required = false) String state,
+                                                                  @RequestParam(name = "cidade", required = false) String city) {
         List<HealthCenterDTO> healthCenter = this.service.getHealthCenters(name, state, city);
         return ResponseEntity.ok(healthCenter);
     }
@@ -39,6 +41,13 @@ public class HealthCenterController {
     @GetMapping("/{cnes}")
     public ResponseEntity<HealthCenterDTO> searchHealthCenter(@PathVariable String cnes){
         HealthCenterDTO healthCenter = this.service.searchHealthCenter(cnes);
+        return ResponseEntity.ok(healthCenter);
+    }
+
+    //procura o posto pelo cnes e mostra funcionários
+    @GetMapping("/{cnes}/funcionarios")
+    public ResponseEntity<HealthCenterEmployeesDTO> listHealthCenterEmployees(@PathVariable String cnes){
+        HealthCenterEmployeesDTO healthCenter = this.service.listHealthCenterEmployees(cnes);
         return ResponseEntity.ok(healthCenter);
     }
 

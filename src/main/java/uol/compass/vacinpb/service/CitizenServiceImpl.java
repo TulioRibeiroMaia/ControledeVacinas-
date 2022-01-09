@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uol.compass.vacinpb.dto.CitizenDTO;
 import uol.compass.vacinpb.dto.CitizenVaccinesDTO;
+import uol.compass.vacinpb.dto.CitizenWithVaccinesDTO;
 import uol.compass.vacinpb.dto.form.CitizenFormDTO;
 import uol.compass.vacinpb.dto.form.CitizenVaccinesFormDTO;
 import uol.compass.vacinpb.entity.Citizen;
@@ -42,8 +43,16 @@ public class CitizenServiceImpl implements CitizenService {
     }
 
     @Override
-    public List<CitizenDTO> getCitizens(String name) {
-        List<Citizen> citizens = this.citizenRepository.findAll();
+    public List<CitizenDTO> getCitizens(String fullName, LocalDate startDate, LocalDate endDate) {
+        List<Citizen> citizens;
+
+        if (fullName != null) {
+            citizens = this.citizenRepository.findByFullNameIgnoreCaseContaining(fullName);
+        } else if (startDate != null && endDate != null) {
+            citizens = this.citizenRepository.findByBirthDateBetween(startDate, endDate);
+        } else {
+            citizens = this.citizenRepository.findAll();
+        }
 
         return citizens
                 .stream()
@@ -120,4 +129,18 @@ public class CitizenServiceImpl implements CitizenService {
 
         return modelMapper.map(citizenVaccines, CitizenVaccinesDTO.class);
     }
+
+    @Override
+    public CitizenWithVaccinesDTO listCitizenVaccines(String cpf) {
+        Optional<Citizen> citizen = this.citizenRepository.findByCpf(cpf);
+
+        if (citizen.isPresent()) {
+            return modelMapper.map(citizen.get(), CitizenWithVaccinesDTO.class);
+        }
+
+        // substituir pela exceção específica assim que implementar o handler
+        throw new RuntimeException("Resource Not Found Exception");
+    }
+
+
 }

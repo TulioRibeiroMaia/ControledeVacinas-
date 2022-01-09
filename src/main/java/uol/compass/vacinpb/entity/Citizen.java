@@ -26,6 +26,6 @@ public class Citizen {
     private String cpf;
     private String cns;
 
-    @OneToMany(mappedBy = "citizen")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "citizen", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CitizenVaccines> vaccines;
 }

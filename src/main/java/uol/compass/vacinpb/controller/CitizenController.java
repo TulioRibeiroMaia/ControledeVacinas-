@@ -1,17 +1,20 @@
 package uol.compass.vacinpb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.CitizenDTO;
 import uol.compass.vacinpb.dto.CitizenVaccinesDTO;
+import uol.compass.vacinpb.dto.CitizenWithVaccinesDTO;
 import uol.compass.vacinpb.dto.form.CitizenFormDTO;
 import uol.compass.vacinpb.dto.form.CitizenVaccinesFormDTO;
 import uol.compass.vacinpb.service.CitizenService;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -38,8 +41,10 @@ public class CitizenController {
 
     //lista os cidadãos com filtro por nome. (Falta implementar o filtro por idade)
     @GetMapping
-    public ResponseEntity<List<CitizenDTO>> getCitizen(@RequestParam(name = "nome", required = false) String fullName) {
-        List<CitizenDTO> citizen = this.service.getCitizens(fullName);
+    public ResponseEntity<List<CitizenDTO>> getCitizens(@RequestParam(name = "nome", required = false) String fullName,
+                                                        @RequestParam(name = "data-inicial", required = false) @DateTimeFormat(pattern = "ddMMyyyy") LocalDate startDate,
+                                                        @RequestParam(name = "data-final", required = false) @DateTimeFormat(pattern = "ddMMyyyy") LocalDate endDate) {
+        List<CitizenDTO> citizen = this.service.getCitizens(fullName, startDate, endDate);
         return ResponseEntity.ok(citizen);
     }
 
@@ -47,6 +52,13 @@ public class CitizenController {
     @GetMapping("/{cpf}")
     public ResponseEntity<CitizenDTO> searchCitizen(@PathVariable String cpf){
         CitizenDTO citizen = this.service.searchCitizen(cpf);
+        return ResponseEntity.ok(citizen);
+    }
+
+    //procura o cidadão pelo seu cpf e mostra suas vacinas
+    @GetMapping("/{cpf}/vacinas")
+    public ResponseEntity<CitizenWithVaccinesDTO> listCitizenVaccines(@PathVariable String cpf){
+        CitizenWithVaccinesDTO citizen = this.service.listCitizenVaccines(cpf);
         return ResponseEntity.ok(citizen);
     }
 

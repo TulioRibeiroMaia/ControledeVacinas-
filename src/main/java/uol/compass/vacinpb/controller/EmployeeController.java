@@ -39,7 +39,7 @@ public class EmployeeController {
 
     //lista os empregados com filtro por nome.
     @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(required = false) String fullName) {
+    public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(name = "nome", required = false) String fullName) {
         List<EmployeeDTO> employee = this.service.getEmployees(fullName);
         return ResponseEntity.ok(employee);
     }

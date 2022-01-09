@@ -34,6 +34,6 @@ public class Vaccine {
 
     private String lotNumber;
 
-    @OneToMany(mappedBy = "vaccine")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "vaccine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CitizenVaccines> vaccines;
 }

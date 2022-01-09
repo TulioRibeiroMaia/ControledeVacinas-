@@ -9,7 +9,7 @@ public interface VaccineService {
 
     VaccineDTO save(VaccineFormDTO body);
 
-    List<VaccineDTO> getVaccines(String name, String manufacturer, String lotNumber);
+    List<VaccineDTO> getVaccines(String lotNumber, Boolean sortExpDate);
 
     VaccineDTO searchVaccine(Long id);
 

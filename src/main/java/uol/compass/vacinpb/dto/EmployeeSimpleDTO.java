@@ -2,21 +2,23 @@ package uol.compass.vacinpb.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import uol.compass.vacinpb.enums.UserRole;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
-public class CitizenDTO {
+public class EmployeeSimpleDTO {
 
     private Long id;
 
     private String cpf;
 
-    private String fullName;
+    private String name;
+
+    private String email;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
-    private String cns;
+    private UserRole userRole;
 }
