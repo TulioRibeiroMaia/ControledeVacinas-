@@ -11,7 +11,6 @@ import uol.compass.vacinpb.entity.HealthCenter;
 import uol.compass.vacinpb.repository.EmployeeRepository;
 import uol.compass.vacinpb.repository.HealthCenterRepository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         if (employee.isPresent()) {
             Employee updatedEmployee = modelMapper.map(body, Employee.class);
-            updatedEmployee.setCpf(cpf);
+            updatedEmployee.setId(employee.get().getId());
             this.employeeRepository.save(updatedEmployee);
 
             return modelMapper.map(updatedEmployee, EmployeeDTO.class);

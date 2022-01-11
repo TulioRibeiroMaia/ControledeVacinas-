@@ -11,5 +11,8 @@ spring:
     defer-datasource-initialization: true
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  sql:
+    init:
+      mode: always
 server:
   port: 8081

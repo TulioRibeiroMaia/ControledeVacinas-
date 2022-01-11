@@ -72,7 +72,7 @@ public class HealthCenterServiceImpl implements HealthCenterService {
 
         if (healthCenter.isPresent()) {
             HealthCenter updatedHealthCenter = modelMapper.map(body, HealthCenter.class);
-            updatedHealthCenter.setCnes(cnes);
+            updatedHealthCenter.setId(healthCenter.get().getId());
             this.healthCenterRepository.save(updatedHealthCenter);
 
             return modelMapper.map(updatedHealthCenter, HealthCenterDTO.class);
