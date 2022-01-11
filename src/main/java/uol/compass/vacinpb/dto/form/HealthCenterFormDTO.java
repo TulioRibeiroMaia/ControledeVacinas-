@@ -1,12 +1,16 @@
 package uol.compass.vacinpb.dto.form;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import uol.compass.vacinpb.enums.State;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HealthCenterFormDTO {
 
     @NotEmpty

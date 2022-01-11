@@ -1,7 +1,9 @@
 package uol.compass.vacinpb.dto.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 import uol.compass.vacinpb.enums.UserRole;
 
@@ -12,6 +14,8 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeFormDTO {
 
     @CPF

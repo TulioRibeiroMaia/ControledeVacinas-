@@ -32,6 +32,7 @@ public class CitizenController {
         return new ResponseEntity<>(citizen, HttpStatus.CREATED);
     }
 
+    //cadastra vacinas em um cidadão
     @PostMapping("/{cpf}/vacinas")
     @Transactional
     public ResponseEntity<CitizenVaccinesDTO> addVaccine(@PathVariable String cpf, @RequestBody @Valid CitizenVaccinesFormDTO body) {
@@ -39,7 +40,7 @@ public class CitizenController {
         return ResponseEntity.ok(citizenVaccine);
     }
 
-    //lista os cidadãos com filtro por nome. (Falta implementar o filtro por idade)
+    //lista os cidadãos com filtro por nome e idade.
     @GetMapping
     public ResponseEntity<List<CitizenDTO>> getCitizens(@RequestParam(name = "nome", required = false) String fullName,
                                                         @RequestParam(name = "data-inicial", required = false) @DateTimeFormat(pattern = "ddMMyyyy") LocalDate startDate,

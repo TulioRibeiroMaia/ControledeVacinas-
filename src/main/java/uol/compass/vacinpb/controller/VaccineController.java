@@ -35,7 +35,7 @@ public class VaccineController {
         return ResponseEntity.ok(vaccine);
     }
 
-    //procura o posto pelo id da vacina
+    //procura a vacina pelo id
     @GetMapping("/{id}")
     public ResponseEntity<VaccineDTO> searchVaccine(@PathVariable Long id){
         VaccineDTO vaccine = this.service.searchVaccine(id);

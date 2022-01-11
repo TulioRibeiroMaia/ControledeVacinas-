@@ -1,6 +1,7 @@
 package uol.compass.vacinpb.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uol.compass.vacinpb.enums.State;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class HealthCenter {
 
     @Id
