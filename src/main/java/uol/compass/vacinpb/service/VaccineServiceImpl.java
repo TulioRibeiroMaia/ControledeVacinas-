@@ -42,7 +42,7 @@ public class VaccineServiceImpl implements VaccineService {
         }
 
         if (Boolean.TRUE.equals(sortExpDate)) {
-            vaccines.sort(Comparator.comparing(Vaccine::getExpirationDate).reversed());
+            vaccines.sort(Comparator.comparing(Vaccine::getExpirationDate));
         }
 
         return vaccines
