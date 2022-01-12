@@ -8,6 +8,7 @@ import uol.compass.vacinpb.dto.VaccineDTO;
 import uol.compass.vacinpb.dto.form.VaccineFormDTO;
 import uol.compass.vacinpb.dto.form.VaccineFormDTO;
 import uol.compass.vacinpb.entity.Vaccine;
+import uol.compass.vacinpb.exception.ResourceNotFoundException;
 import uol.compass.vacinpb.repository.VaccineRepository;
 
 import java.util.Comparator;
@@ -60,8 +61,7 @@ public class VaccineServiceImpl implements VaccineService {
             return modelMapper.map(vaccine.get(), VaccineDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("ID " + id);
     }
 
     @Override
@@ -76,8 +76,7 @@ public class VaccineServiceImpl implements VaccineService {
             return modelMapper.map(updatedVaccine, VaccineDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("ID " + id);
     }
 
     @Override
@@ -89,7 +88,6 @@ public class VaccineServiceImpl implements VaccineService {
             return modelMapper.map(vaccine.get(), VaccineDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("ID " + id);
     }
 }

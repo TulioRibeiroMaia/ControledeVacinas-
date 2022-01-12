@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -27,6 +28,6 @@ public class CitizenFormDTO {
     @NotNull
     private LocalDate birthDate;
 
-    @Size(min = 15, max = 15, message = "Tamanho inválido")
+    @Size(min = 15, max = 15, message = "Tamanho inválido: o número do CNS deve conter 15 dígitos")
     private String cns;
 }

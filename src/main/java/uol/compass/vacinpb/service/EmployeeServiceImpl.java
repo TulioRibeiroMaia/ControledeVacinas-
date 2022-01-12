@@ -8,6 +8,7 @@ import uol.compass.vacinpb.dto.form.EmployeeFormDTO;
 import uol.compass.vacinpb.dto.form.EmployerRegistrationFormDTO;
 import uol.compass.vacinpb.entity.Employee;
 import uol.compass.vacinpb.entity.HealthCenter;
+import uol.compass.vacinpb.exception.ResourceNotFoundException;
 import uol.compass.vacinpb.repository.EmployeeRepository;
 import uol.compass.vacinpb.repository.HealthCenterRepository;
 
@@ -59,8 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return modelMapper.map(employee.get(), EmployeeDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
     @Override
@@ -75,8 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return modelMapper.map(updatedEmployee, EmployeeDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
     @Override
@@ -88,8 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             return modelMapper.map(employee.get(), EmployeeDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
     @Override
@@ -98,12 +96,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         Optional<HealthCenter> hcOptional = hcRepository.findByCnes(body.getCnes());
 
         if (!employeeOptional.isPresent()) {
-            // substituir pela exceção específica assim que implementar o handler
-            throw new RuntimeException("Resource Not Found Exception - CPF");
+            throw new ResourceNotFoundException("CPF " + cpf);
         }
         if (!hcOptional.isPresent()) {
-            // substituir pela exceção específica assim que implementar o handler
-            throw new RuntimeException("Resource Not Found Exception - CNES");
+            throw new ResourceNotFoundException("CNES" + body.getCnes());
         }
 
         Employee employee = employeeOptional.get();

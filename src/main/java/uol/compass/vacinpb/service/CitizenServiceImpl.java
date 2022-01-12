@@ -11,6 +11,7 @@ import uol.compass.vacinpb.dto.form.CitizenVaccinesFormDTO;
 import uol.compass.vacinpb.entity.Citizen;
 import uol.compass.vacinpb.entity.CitizenVaccines;
 import uol.compass.vacinpb.entity.Vaccine;
+import uol.compass.vacinpb.exception.ResourceNotFoundException;
 import uol.compass.vacinpb.repository.CitizenRepository;
 import uol.compass.vacinpb.repository.CitizenVaccinesRepository;
 import uol.compass.vacinpb.repository.VaccineRepository;
@@ -69,8 +70,7 @@ public class CitizenServiceImpl implements CitizenService {
             return modelMapper.map(citizen.get(), CitizenDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
     @Override
@@ -85,8 +85,7 @@ public class CitizenServiceImpl implements CitizenService {
             return modelMapper.map(updatedCitizen, CitizenDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
     @Override
@@ -98,8 +97,7 @@ public class CitizenServiceImpl implements CitizenService {
             return modelMapper.map(citizen.get(), CitizenDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
     @Override
@@ -109,12 +107,10 @@ public class CitizenServiceImpl implements CitizenService {
         LocalDate vaccinationDate = body.getVaccinationDate();
 
         if (!citizenOptional.isPresent()) {
-            // substituir pela exceção específica assim que implementar o handler
-            throw new RuntimeException("Resource Not Found Exception - CPF");
+            throw new ResourceNotFoundException("CPF " + cpf);
         }
         if (!vaccineOptional.isPresent()) {
-            // substituir pela exceção específica assim que implementar o handler
-            throw new RuntimeException("Resource Not Found Exception - ID vacina");
+            throw new ResourceNotFoundException("ID " + body.getVaccineId());
         }
 
         Citizen citizen = citizenOptional.get();
@@ -138,8 +134,7 @@ public class CitizenServiceImpl implements CitizenService {
             return modelMapper.map(citizen.get(), CitizenWithVaccinesDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CPF " + cpf);
     }
 
 

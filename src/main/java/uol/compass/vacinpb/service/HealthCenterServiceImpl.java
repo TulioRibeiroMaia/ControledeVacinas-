@@ -10,6 +10,7 @@ import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.entity.HealthCenter;
 import uol.compass.vacinpb.enums.State;
+import uol.compass.vacinpb.exception.ResourceNotFoundException;
 import uol.compass.vacinpb.repository.HealthCenterRepository;
 
 import java.util.List;
@@ -62,8 +63,7 @@ public class HealthCenterServiceImpl implements HealthCenterService {
             return modelMapper.map(healthCenter.get(), HealthCenterDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CNES " + cnes);
     }
 
     @Override
@@ -78,8 +78,7 @@ public class HealthCenterServiceImpl implements HealthCenterService {
             return modelMapper.map(updatedHealthCenter, HealthCenterDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CNES " + cnes);
     }
 
     @Override
@@ -103,7 +102,6 @@ public class HealthCenterServiceImpl implements HealthCenterService {
             return modelMapper.map(healthCenter.get(), HealthCenterEmployeesDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CNES " + cnes);
     }
 }
