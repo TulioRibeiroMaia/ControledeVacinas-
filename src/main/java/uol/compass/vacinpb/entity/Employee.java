@@ -37,6 +37,7 @@ public class Employee implements UserDetails {
     @Enumerated(EnumType.STRING)
     public UserRole userRole;
 
+    @Column(unique = true)
     private String email;
 
     private String password;

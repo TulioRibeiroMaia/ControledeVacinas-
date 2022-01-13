@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class VaccineFormDTO {
 
-    @NotNull
+    @NotNull(message = "Nome inválido: verifique a lista de vacinas ofertadas pelo SUS")
     private VaccineName vaccineName;
 
     @NotEmpty

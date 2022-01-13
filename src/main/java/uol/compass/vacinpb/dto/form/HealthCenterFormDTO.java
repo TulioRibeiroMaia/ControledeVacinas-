@@ -22,6 +22,6 @@ public class HealthCenterFormDTO {
     @NotEmpty
     private String city;
 
-    @NotNull
+    @NotNull(message = "Insira uma sigla válida de UF")
     private State state;
 }
