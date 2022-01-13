@@ -17,7 +17,7 @@ import uol.compass.vacinpb.dto.form.LoginForm;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class AuthenticationController {
 
     @Autowired

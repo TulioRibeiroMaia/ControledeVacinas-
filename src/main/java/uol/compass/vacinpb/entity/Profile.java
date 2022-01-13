@@ -16,6 +16,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class Profile implements GrantedAuthority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
