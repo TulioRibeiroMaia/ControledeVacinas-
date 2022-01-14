@@ -42,7 +42,7 @@ public class TokenService {
         }
     }
 
-    public Long getCpfEmployee(String token) {
+    public Long getIdEmployee(String token) {
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
     }

@@ -3,6 +3,7 @@ package uol.compass.vacinpb.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.VaccineDTO;
 import uol.compass.vacinpb.dto.form.VaccineFormDTO;
@@ -20,6 +21,7 @@ public class VaccineController {
     private VaccineService service;
 
     //cadastra novas vacinas
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Transactional
     public ResponseEntity<VaccineDTO> saveVaccine(@RequestBody @Valid VaccineFormDTO body) {
@@ -28,6 +30,7 @@ public class VaccineController {
     }
 
     //lista as vacinas por nome e número do lote.
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(name = "lote", required = false) String lotNumber,
                                                         @RequestParam(name = "ordenar-validade", required = false) Boolean sortExpDate) {
@@ -36,6 +39,7 @@ public class VaccineController {
     }
 
     //procura a vacina pelo id
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{id}")
     public ResponseEntity<VaccineDTO> searchVaccine(@PathVariable Long id){
         VaccineDTO vaccine = this.service.searchVaccine(id);
@@ -43,6 +47,7 @@ public class VaccineController {
     }
 
     //atualiza os dados de uma vacina referenciado ao id
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<VaccineDTO> updateVaccine(@PathVariable Long id, @RequestBody @Valid VaccineFormDTO body) {
@@ -51,6 +56,7 @@ public class VaccineController {
     }
 
     //deleta uma vacina
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<VaccineDTO> deleteVaccine(@PathVariable Long id) {

@@ -3,6 +3,7 @@ package uol.compass.vacinpb.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.HealthCenterDTO;
 import uol.compass.vacinpb.dto.HealthCenterEmployeesDTO;
@@ -21,6 +22,7 @@ public class HealthCenterController {
     private HealthCenterService service;
 
     //cadastra novos postos de saúde
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Transactional
     public ResponseEntity<HealthCenterDTO> saveHealthCenter(@RequestBody @Valid HealthCenterFormDTO body) {
@@ -45,6 +47,7 @@ public class HealthCenterController {
     }
 
     //procura o posto pelo cnes e mostra funcionários
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{cnes}/funcionarios")
     public ResponseEntity<HealthCenterEmployeesDTO> listHealthCenterEmployees(@PathVariable String cnes){
         HealthCenterEmployeesDTO healthCenter = this.service.listHealthCenterEmployees(cnes);
@@ -52,6 +55,7 @@ public class HealthCenterController {
     }
 
     //atualiza os dados de um posto de saúde
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{cnes}")
     @Transactional
     public ResponseEntity<HealthCenterDTO> updateHealthCenter(@PathVariable String cnes, @RequestBody @Valid HealthCenterFormDTO body) {
@@ -60,6 +64,7 @@ public class HealthCenterController {
     }
 
     //deleta um posto de saúde
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{cnes}")
     @Transactional
     public ResponseEntity<HealthCenterDTO> deleteHealthCenter(@PathVariable String cnes) {

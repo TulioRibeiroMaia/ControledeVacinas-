@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.CitizenDTO;
 import uol.compass.vacinpb.dto.CitizenVaccinesDTO;
@@ -25,6 +26,7 @@ public class CitizenController {
     private CitizenService service;
 
     //cadastra novos cidadãos
+    @PreAuthorize("hasRole('ADMIN', 'FUNCIONARIO')")
     @PostMapping
     @Transactional
     public ResponseEntity<CitizenDTO> saveCitizen(@RequestBody @Valid CitizenFormDTO body) {
@@ -33,6 +35,7 @@ public class CitizenController {
     }
 
     //cadastra vacinas em um cidadão
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @PostMapping("/{cpf}/vacinas")
     @Transactional
     public ResponseEntity<CitizenVaccinesDTO> addVaccine(@PathVariable String cpf, @RequestBody @Valid CitizenVaccinesFormDTO body) {
@@ -64,6 +67,7 @@ public class CitizenController {
     }
 
     //atualiza os dados de um cidadão
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @PutMapping("/{cpf}")
     @Transactional
     public ResponseEntity<CitizenDTO> updateCitizen(@PathVariable String cpf, @RequestBody @Valid CitizenFormDTO body) {
@@ -72,6 +76,7 @@ public class CitizenController {
     }
 
     //deleta um cidadão
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{cpf}")
     @Transactional
     public ResponseEntity<CitizenDTO> deleteCitizen(@PathVariable String cpf) {

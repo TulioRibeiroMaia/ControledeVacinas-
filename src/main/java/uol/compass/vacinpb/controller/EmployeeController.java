@@ -3,6 +3,7 @@ package uol.compass.vacinpb.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uol.compass.vacinpb.dto.EmployeeDTO;
 import uol.compass.vacinpb.dto.form.EmployeeFormDTO;
@@ -15,13 +16,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/funcionarios")
+@RequestMapping(value = "/funcionarios")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService service;
 
     //cadastra novos funcionários
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Transactional
     public ResponseEntity<EmployeeDTO> saveEmployee(@RequestBody @Valid EmployeeFormDTO body) {
@@ -30,6 +32,7 @@ public class EmployeeController {
     }
 
     //registra um novo empregado em um posto(UBS)
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{cpf}/unidades")
     @Transactional
     public ResponseEntity<EmployeeDTO> registerEmployee(@PathVariable String cpf, @RequestBody @Valid EmployerRegistrationFormDTO body) {
@@ -38,6 +41,7 @@ public class EmployeeController {
     }
 
     //lista os empregados com filtro por nome.
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(name = "nome", required = false) String fullName) {
         List<EmployeeDTO> employee = this.service.getEmployees(fullName);
@@ -45,6 +49,7 @@ public class EmployeeController {
     }
 
     //procura o empregado pelo seu cpf
+    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{cpf}")
     public ResponseEntity<EmployeeDTO> searchEmployee(@PathVariable String cpf){
         EmployeeDTO employee = this.service.searchEmployee(cpf);
@@ -52,6 +57,7 @@ public class EmployeeController {
     }
 
     //atualiza os dados de um empregado
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{cpf}")
     @Transactional
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable String cpf, @RequestBody @Valid EmployeeFormDTO body) {
@@ -60,6 +66,7 @@ public class EmployeeController {
     }
 
     //deleta um empregado
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{cpf}")
     @Transactional
     public ResponseEntity<EmployeeDTO> deleteEmployee(@PathVariable String cpf) {

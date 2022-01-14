@@ -136,6 +136,4 @@ public class CitizenServiceImpl implements CitizenService {
 
         throw new ResourceNotFoundException("CPF " + cpf);
     }
-
-
 }
