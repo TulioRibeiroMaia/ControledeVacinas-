@@ -47,7 +47,7 @@ public class HealthCenterController {
     }
 
     //procura o posto pelo cnes e mostra funcionários
-    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{cnes}/funcionarios")
     public ResponseEntity<HealthCenterEmployeesDTO> listHealthCenterEmployees(@PathVariable String cnes){
         HealthCenterEmployeesDTO healthCenter = this.service.listHealthCenterEmployees(cnes);

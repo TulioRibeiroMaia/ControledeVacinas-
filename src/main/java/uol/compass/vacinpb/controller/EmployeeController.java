@@ -41,7 +41,7 @@ public class EmployeeController {
     }
 
     //lista os empregados com filtro por nome.
-    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<List<EmployeeDTO>> getEmployees(@RequestParam(name = "nome", required = false) String fullName) {
         List<EmployeeDTO> employee = this.service.getEmployees(fullName);
@@ -49,7 +49,7 @@ public class EmployeeController {
     }
 
     //procura o empregado pelo seu cpf
-    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{cpf}")
     public ResponseEntity<EmployeeDTO> searchEmployee(@PathVariable String cpf){
         EmployeeDTO employee = this.service.searchEmployee(cpf);

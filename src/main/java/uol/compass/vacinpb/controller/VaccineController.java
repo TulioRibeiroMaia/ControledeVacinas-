@@ -30,7 +30,7 @@ public class VaccineController {
     }
 
     //lista as vacinas por nome e número do lote.
-    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(name = "lote", required = false) String lotNumber,
                                                         @RequestParam(name = "ordenar-validade", required = false) Boolean sortExpDate) {
@@ -39,7 +39,7 @@ public class VaccineController {
     }
 
     //procura a vacina pelo id
-    @PreAuthorize("hasRole('ADMIN','FUNCIONARIO')")
+    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{id}")
     public ResponseEntity<VaccineDTO> searchVaccine(@PathVariable Long id){
         VaccineDTO vaccine = this.service.searchVaccine(id);
