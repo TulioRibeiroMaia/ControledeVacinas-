@@ -48,7 +48,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/cidadaos").permitAll()
                 .antMatchers(HttpMethod.GET, "/cidadaos/{cpf}").permitAll()
                 .antMatchers(HttpMethod.GET, "/cidadaos/{cpf}/vacinas").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/cidadaos/{cpf}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/unidades").permitAll()
                 .antMatchers(HttpMethod.GET, "/unidades/{cnes}").permitAll()
                 .anyRequest().authenticated()
