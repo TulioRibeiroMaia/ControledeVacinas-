@@ -3,7 +3,7 @@
 # Introdução
 
 Com o caos gerado pela pandemia da COVID-19 e a procura da população pelas vacinas, notamos que em UBS (Unidade Básica de Saúde), os funcionários dessas unidades têm uma enorme dificuldade em fazer a gestão das vacinas, pois precisam fazer as anotações em cadernos para poder realizar todo uma gestão de qual vacina um cidadão tomou, os dados básicos para um cadastro de cada cidadão, o estoque de vacinas, gerando assim, uma demora ainda maior e filas.
-Visando uma melhora para esses profissionais, desenvolveremos uma API para automatizar todas esse procedimento anterior a aplicação das vacinas.
+Visando uma melhora para esses profissionais, desenvolveremos uma API para automatizar todo esse procedimento anterior a aplicação das vacinas.
 
 ## Problema
 
