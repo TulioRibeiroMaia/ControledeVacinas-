@@ -11,6 +11,7 @@ import uol.compass.vacinpb.dto.HealthCenterDTO;
 import uol.compass.vacinpb.dto.HealthCenterEmployeesDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.enums.State;
+import uol.compass.vacinpb.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -47,12 +48,45 @@ class HealthCenterServiceImplTest {
     }
 
     @Test
+    @DisplayName("Deve retornar uma lista de unidades de saúde ao filtar por um nome cadastrado")
+    void getHealthCentersByNameTest() {
+        List<HealthCenterDTO> healthCenters = this.hcService.getHealthCenters("padre", null, null);
+
+        assertEquals(1, healthCenters.size());
+        assertTrue(healthCenters.get(0).getName().toLowerCase().contains("padre"));
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de unidades de saúde ao filtar por Estado")
+    void getHealthCentersByStateTest() {
+        List<HealthCenterDTO> healthCenters = this.hcService.getHealthCenters(null, "MG", null);
+
+        assertEquals(1, healthCenters.size());
+        assertEquals(State.MG, healthCenters.get(0).getState());
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de unidades de saúde ao filtar por cidade")
+    void getHealthCentersByCityTest() {
+        List<HealthCenterDTO> healthCenters = this.hcService.getHealthCenters(null, null, "belo");
+
+        assertEquals(1, healthCenters.size());
+        assertTrue(healthCenters.get(0).getCity().toLowerCase().contains("belo"));
+    }
+
+    @Test
     @DisplayName("Deve retornar uma unidade de saúde ao procurar por um CNES cadastrado")
     void searchHealthCenterTest() {
         HealthCenterDTO healthCenter = this.hcService.searchHealthCenter("2695464");
 
         assertNotNull(healthCenter);
         assertEquals(1L, healthCenter.getId());
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao procurar por um CNES não cadastrado")
+    void searchHealthCenterWithInvalidCnesTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.hcService.searchHealthCenter("0000000"));
     }
 
     @Test
@@ -70,6 +104,12 @@ class HealthCenterServiceImplTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar atualizar unidade de saúde informando um CNES não cadastrado")
+    void updateHealthCenterWithInvalidCnesTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.hcService.updateHealthCenter("0000000", null));
+    }
+
+    @Test
     @DisplayName("Deve remover unidade de saúde ao informar um CNES cadastrado")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void deleteHealthCenterTest() {
@@ -82,6 +122,12 @@ class HealthCenterServiceImplTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar remover unidade de saúde informando um CNES não cadastrado")
+    void deleteHealthCenterWithInvalidCnesTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.hcService.deleteHealthCenter("0000000"));
+    }
+
+    @Test
     @DisplayName("Deve retornar uma unidade de saúde com a lista de seus funcionários registrados ao informar CNES cadastrado")
     void listHealthCenterEmployeesTest() {
         HealthCenterEmployeesDTO healthCenter = this.hcService.listHealthCenterEmployees("2695464");
@@ -89,5 +135,11 @@ class HealthCenterServiceImplTest {
         assertNotNull(healthCenter);
         assertEquals(1L, healthCenter.getId());
         assertEquals(0, healthCenter.getEmployees().size());
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar listar funcionários registrados em uma unidade de saúde com um CNES não cadastrado")
+    void listHealthCenterEmployeesWithInvalidCnesTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.hcService.listHealthCenterEmployees("0000000"));
     }
 }

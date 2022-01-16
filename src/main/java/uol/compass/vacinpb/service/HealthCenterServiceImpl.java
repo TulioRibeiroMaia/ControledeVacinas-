@@ -90,8 +90,7 @@ public class HealthCenterServiceImpl implements HealthCenterService {
             return modelMapper.map(healthCenter.get(), HealthCenterDTO.class);
         }
 
-        // substituir pela exceção específica assim que implementar o handler
-        throw new RuntimeException("Resource Not Found Exception");
+        throw new ResourceNotFoundException("CNES " + cnes);
     }
 
     @Override
