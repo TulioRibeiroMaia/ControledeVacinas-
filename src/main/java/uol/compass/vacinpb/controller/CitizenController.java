@@ -44,6 +44,7 @@ public class CitizenController {
     }
 
     //lista os cidadãos com filtro por nome e idade.
+    @PreAuthorize("hasAnyRole('ADMIN', 'FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<List<CitizenDTO>> getCitizens(@RequestParam(name = "nome", required = false) String fullName,
                                                         @RequestParam(name = "data-inicial", required = false) @DateTimeFormat(pattern = "ddMMyyyy") LocalDate startDate,

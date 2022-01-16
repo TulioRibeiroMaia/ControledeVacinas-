@@ -57,7 +57,32 @@ class CitizenControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
-    //needs to do
+    @Test
+    @DisplayName("Deveria retornar Bad Request ao tentar salvar usuário com campo inválido")
+    public void saveCitizenWithInvalidField() throws Exception {
+        // cpf inválido
+        CitizenFormDTO citizenFormDTO = new CitizenFormDTO(
+                "00000000000", "Francisco Vicente Zappa", LocalDate.now(), "318596810001714");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/cidadaos")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(citizenFormDTO)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("Deveria retornar Bad Request ao tentar salvar usuário com campo vazio")
+    public void saveCitizenWithEmptyField() throws Exception {
+        // nome vazio
+        CitizenFormDTO citizenFormDTO = new CitizenFormDTO(
+                "40040998037", "", LocalDate.now(), "318596810001714");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/cidadaos")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(citizenFormDTO)))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
     @Test
     @DisplayName("Deveria cadastrar vacinas em um cidadão")
     public void shouldSaveVaccinesInACitizen() throws Exception {
@@ -70,7 +95,7 @@ class CitizenControllerTest {
     }
 
     @Test
-    @DisplayName("Deveria retornar todos cidadões cadastrados")
+    @DisplayName("Deveria retornar todos cidadãos cadastrados")
     public void shouldListAllCitizens() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/cidadaos"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -92,7 +117,7 @@ class CitizenControllerTest {
 
     @Test
     @DisplayName("Deveria encontrar um cidadão pelo seu CPF e retornar status OK")
-    public void shouldLisACitizenByCpf() throws Exception {
+    public void shouldListACitizenByCpf() throws Exception {
         mockMvc.perform((MockMvcRequestBuilders.get("/cidadaos/40040998037")))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
