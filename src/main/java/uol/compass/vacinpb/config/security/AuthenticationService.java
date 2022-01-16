@@ -22,6 +22,7 @@ public class AuthenticationService implements UserDetailsService {
         if (userRole.isPresent()) {
             return (UserDetails) userRole.get();
         }
+        System.out.println(userRole);
         throw new UsernameNotFoundException("Dados inválidos!");
     }
 }

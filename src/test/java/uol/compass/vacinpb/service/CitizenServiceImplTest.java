@@ -12,12 +12,12 @@ import uol.compass.vacinpb.dto.CitizenVaccinesDTO;
 import uol.compass.vacinpb.dto.CitizenWithVaccinesDTO;
 import uol.compass.vacinpb.dto.form.CitizenFormDTO;
 import uol.compass.vacinpb.dto.form.CitizenVaccinesFormDTO;
+import uol.compass.vacinpb.exception.ResourceNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -51,12 +51,40 @@ class CitizenServiceImplTest {
     }
 
     @Test
+    @DisplayName("Deve retornar uma lista com cidadãos ao filtrar por nome cadastrado")
+    void getCitizensByNameTest() {
+        List<CitizenDTO> citizens = this.citizenService.getCitizens("zappa", null, null);
+
+        assertEquals(1, citizens.size());
+        assertTrue(citizens.get(0).getFullName().contains("Zappa"));
+    }
+
+    @Test
+    @DisplayName("Deve retornar uma lista de cidadãos ao filtrar por data de nascimento")
+    void getCitizensByBirthDateTest() {
+        LocalDate start = LocalDate.of(1940, 1, 1);
+        LocalDate end = LocalDate.of(1940, 12, 31);
+
+        List<CitizenDTO> citizens = this.citizenService.getCitizens(null, start, end);
+
+        assertEquals(1, citizens.size());
+        assertTrue(citizens.get(0).getBirthDate().isAfter(start));
+        assertTrue(citizens.get(0).getBirthDate().isBefore(end));
+    }
+
+    @Test
     @DisplayName("Deve retornar um cidadão ao procurar por um CPF cadastrado")
     void searchCitizenTest() {
         CitizenDTO citizen = this.citizenService.searchCitizen("53649189046");
 
         assertNotNull(citizen);
         assertEquals(1L, citizen.getId());
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao procurar por um CPF não cadastrado")
+    void searchCitizenByInvalidCpfTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.citizenService.searchCitizen("00000000000"));
     }
 
     @Test
@@ -75,6 +103,12 @@ class CitizenServiceImplTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar atualizar um CPF não cadastrado")
+    void updateCitizenWithInvalidCpfTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.citizenService.updateCitizen("00000000000", null));
+    }
+
+    @Test
     @DisplayName("Deve remover cidadão ao informar um CPF cadastrado")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void deleteCitizenTest() {
@@ -87,19 +121,40 @@ class CitizenServiceImplTest {
     }
 
     @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar remover informando CPF não cadastrado")
+    void deleteCitizenWithInvalidCpfTest() {
+        assertThrows(ResourceNotFoundException.class, () -> this.citizenService.deleteCitizen("00000000000"));
+    }
+
+    @Test
     @DisplayName("Deve registrar uma ocorrência de vacinação para o cidadão ao informar um CPF cadastrado")
     @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     void addVaccineTest() {
-        CitizenVaccinesFormDTO vaccineForm = new CitizenVaccinesFormDTO();
         LocalDate vaccinationDate = LocalDate.of(2022, 1, 1);
-
-        vaccineForm.setVaccineId(1L);
-        vaccineForm.setVaccinationDate(vaccinationDate);
+        CitizenVaccinesFormDTO vaccineForm = new CitizenVaccinesFormDTO(1L, vaccinationDate);
 
         CitizenVaccinesDTO citizenVaccines = this.citizenService.addVaccine("53649189046", vaccineForm);
 
         assertEquals(2L, citizenVaccines.getId());
         assertEquals(vaccinationDate, citizenVaccines.getVaccinationDate());
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar adicionar vacina informando CPF não cadastrado")
+    void addVaccineWithInvalidCpfTest() {
+        LocalDate vaccinationDate = LocalDate.of(2022, 1, 1);
+        CitizenVaccinesFormDTO vaccineForm = new CitizenVaccinesFormDTO(1L, vaccinationDate);
+
+        assertThrows(ResourceNotFoundException.class, () -> this.citizenService.addVaccine("00000000000", vaccineForm));
+    }
+
+    @Test
+    @DisplayName("Deve lançar exceção Resource Not Found ao tentar adicionar vacina informando ID não cadastrado")
+    void addVaccineWithInvalidIdTest() {
+        LocalDate vaccinationDate = LocalDate.of(2022, 1, 1);
+        CitizenVaccinesFormDTO vaccineForm = new CitizenVaccinesFormDTO(-1L, vaccinationDate);
+
+        assertThrows(ResourceNotFoundException.class, () -> this.citizenService.addVaccine("53649189046", vaccineForm));
     }
 
     @Test
