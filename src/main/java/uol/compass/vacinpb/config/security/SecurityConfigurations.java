@@ -49,6 +49,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/cidadaos/{cpf}/vacinas").permitAll()
                 .antMatchers(HttpMethod.GET, "/unidades").permitAll()
                 .antMatchers(HttpMethod.GET, "/unidades/{cnes}").permitAll()
+                .antMatchers(HttpMethod.GET, "/vacinas").permitAll()
+                .antMatchers(HttpMethod.GET, "/vacinas/{id}").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

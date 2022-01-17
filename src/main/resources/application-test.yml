@@ -3,16 +3,11 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:vacinpb-test
     username: test
-    password:
+    password: test
   jpa:
-    database: h2
-    hibernate:
-      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
   h2:
     console:
       enabled: true
       path: /h2-console
-  sql:
-    init:
-      mode: always
