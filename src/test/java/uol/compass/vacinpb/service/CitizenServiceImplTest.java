@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@ActiveProfiles("test")
 class CitizenServiceImplTest {
 
     @Autowired
