@@ -28,7 +28,7 @@ public class VaccineController {
         return new ResponseEntity<>(vaccine, HttpStatus.CREATED);
     }
 
-    //lista as vacinas por nome e número do lote.
+    //lista as vacinas pelo número do lote e ordena pela validade.
     @GetMapping
     public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(name = "lote", required = false) String lotNumber,
                                                         @RequestParam(name = "ordenar-validade", required = false) Boolean sortExpDate) {

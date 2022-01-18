@@ -1,0 +1,1126 @@
+openapi: 3.0.1
+info:
+  title: VacinPB API
+  description: >-
+    Com o caos gerado pela pandemia da COVID-19 e a procura da população pelas
+    vacinas, notamos que em UBS (Unidade Básica de Saúde), os funcionários
+    dessas unidades têm uma enorme dificuldade em fazer a gestão das vacinas,
+    pois precisam fazer as anotações em cadernos para poder realizar todo uma
+    gestão de qual vacina um cidadão tomou, os dados básicos para um cadastro de
+    cada cidadão, o estoque de vacinas, gerando assim, uma demora ainda maior e
+    filas. Visando uma melhora para esses profissionais, desenvolveremos uma API
+    para automatizar todo esse procedimento anterior a aplicação das vacinas.
+  version: 0.0.1
+  license:
+    name: 'Lincença: GPLv3'
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Código de VacinPB API
+  url: https://github.com/TulioRibeiroMaia/ControledeVacinas-
+servers:
+  - url: http://localhost:8081
+    description: API local
+paths:
+  /cidadaos:
+    post:
+      summary: Cadastrar novos cidadãos
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Citizen'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/cidadaos
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+    parameters:
+      - name: nome
+        in: query
+        description: Filtrar por nome do cidadão.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      - name: data-inicial&data-final
+        in: query
+        description: Filtrar por idade do cidadão.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+    get:
+      summary: Listar todos cidadãos
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List_Citizen'
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+  /cidadaos/{cpf}/vacinas:
+    parameters:
+      - name: cpf
+        in: path
+        schema:
+          type: string
+        required: true
+    post:
+      summary: Cadastrar vacinas em um cidadão
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostVaccineCitizen'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/cidadaos/{cpf}/vacinas
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: Recurso não encontrado
+                description: uri=/cidadaos/{cpf}/vacinas
+
+      security:
+        - login: []
+    get:
+      summary: Listar um cidadão pelo CPF informado e mostrar suas vacinas
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Citizen_cpf'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: Recurso não encontrado
+                description: uri=/cidadaos/{cpf}/vacinas
+  /cidadaos/{cpf}:
+    parameters:
+      - name: cpf
+        in: path
+        schema:
+          type: string
+        required: true
+    get:
+      summary: Listar um cidadão pelo CPF informado
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Citizen'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: Recurso não encontrado
+                description: uri=/cidadaos/{cpf}
+    put:
+      summary: Atualizar dados de um cidadão de acordo com o CPF informado
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutCitizen'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/cidadaos/{cpf}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/cidadaos/{cpf}
+      security:
+        - login: []
+    delete:
+      summary: Deletar um cidadão de acordo com o CPF informado
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/cidadaos/{cpf}
+      security:
+        - login: []
+
+  /funcionarios:
+    post:
+      summary: Cadastrar novos funcionários
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/funcionarios
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+    parameters:
+      - name: nome
+        in: query
+        description: Filtrar por nome do funcionario.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+    get:
+      summary: Listar todos funcionários
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+  /funcionarios/{cpf}/unidades:
+    parameters:
+      - name: cpf
+        in: path
+        schema:
+          type: string
+        required: true
+    post:
+      summary: Cadastrar funcionários em um posto de saúde
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee_HealthCenter'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/funcionarios/{cpf}/unidades
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+  /funcionarios/{cpf}:
+    parameters:
+      - name: cpf
+        in: path
+        schema:
+          type: string
+        required: true
+    get:
+      summary: Listar um empregado pelo CPF informado
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/funcionarios/{cpf}
+      security:
+        - login: []
+    put:
+      summary: Atualizar dados de um funcionário de acordo com o CPF informado
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeCpf'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/funcionarios/{cpf}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/funcionarios/{cpf}
+      security:
+        - login: []
+    delete:
+      summary: Deletar um funcionário de acordo com o CPF informado
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/funcionarios/{cpf}
+      security:
+        - login: []
+
+  /unidades:
+    post:
+      summary: Cadastrar novos postos de saúde
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCenter'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/unidades
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+    parameters:
+      - name: nome
+        in: query
+        description: Filtrar por nome do posto de saúde.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      - name: uf
+        in: query
+        description: Encontrar postos de saúde em um Estado.
+        required: false
+        schema:
+          type: string
+          enum:
+            - 'AC'
+            - 'AL'
+            - 'AP'
+            - 'AM'
+            - 'BA'
+            - 'CE'
+            - 'DF'
+            - 'ES'
+            - 'GO'
+            - 'MA'
+            - 'MT'
+            - 'MS'
+            - 'MG'
+            - 'PA'
+            - 'PB'
+            - 'PR'
+            - 'PE'
+            - 'PI'
+            - 'RJ'
+            - 'RN'
+            - 'RS'
+            - 'RO'
+            - 'RR'
+            - 'SC'
+            - 'SP'
+            - 'SE'
+            - 'TO'
+        style: form
+        explode: true
+      - name: cidade
+        in: query
+        description: Encontrar postos de saúde em uma cidade.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+    get:
+      summary: Listar todos os postos de saúde
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCenter'
+        '404':
+          description: Not Found
+  /unidades/{cnes}:
+    parameters:
+      - name: cnes
+        in: path
+        schema:
+          type: string
+        required: true
+    get:
+      summary: Listar o posto de saúde pelo CNES
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCenter'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/unidades/{cnes}
+    put:
+      summary: Atualizar dados de um posto de saúdes de acordo com o CNES informado
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutHealthCenterCnes'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/unidades/{cnes}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/unidades/{cnes}
+      security:
+        - login: []
+    delete:
+      summary: Deletar um posto de saúde de acordo com o CNES informado
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/unidades/{cnes}
+      security:
+        - login: []
+  /unidades/{cnes}/funcionarios:
+    parameters:
+      - name: cnes
+        in: path
+        schema:
+          type: string
+        required: true
+    get:
+      summary: Pesquisar o posto de saúde pelo seu CNES e listar os funcionários
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealtCenter_Employee'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/unidades/{cnes}/funcionarios
+      security:
+        - login: []
+
+  /vacinas:
+    post:
+      summary: Cadastrar novas vacinas
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccine'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/vacinas
+        '403':
+          description: Forbidden
+      security:
+        - login: []
+    parameters:
+      - name: lote
+        in: query
+        description: Filtrar pelo lote da vacina.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+      - name: ordenar-validade
+        in: query
+        description: Filtrar pela validade das vacinas.
+        required: false
+        schema:
+          type: string
+        style: form
+        explode: true
+    get:
+      summary: Listar todas vacinas
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccine'
+        '404':
+          description: Not Found
+  /vacinas/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      summary: Listar a vacina pelo ID
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccine'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/vacinas/{id}
+    put:
+      summary: Atualizar os dados de uma vacina de acordo com o ID informado
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vaccine_id'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                statusCode: 400
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                fieldErrors:
+                  field: campo
+                  error: descrição do erro
+                description: uri=/vacinas/{id}
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/vacinas/{id}
+      security:
+        - login: []
+    delete:
+      summary: Deletar uma vacina de acordo com o ID informado
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                statusCode: 404
+                timestamp: "2022-01-18T13:23:29.139+00:00"
+                message: recurso não encontrado
+                description: uri=/vacinas/{id}
+      security:
+        - login: []
+components:
+  schemas:
+    Citizen:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cpf:
+          type: string
+        fullName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        userRole:
+          type: string
+          enum:
+            - 'USUARIO'
+            - 'FUNCIONARIO'
+            - 'ADMIN'
+        cns:
+          type: string
+      example:
+        id: 2
+        cpf: 62939733058
+        fullName: Dino Vicente da Silva
+        birthDate: 28/06/1999
+        cns: 640819871715964
+    List_Citizen:
+      type: array
+      items:
+        $ref: "#/components/schemas/Citizen"
+    PostVaccineCitizen:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vaccinationDate:
+          type: string
+          format: date
+      example:
+        id: 2
+        vaccine:
+          id: 1
+          vaccineName: BCG
+          manufacturer: Fundação Ataulpho de Paiva
+          manufactureDate: 15/11/2021
+          expirationDate: 119/02/2022
+          lotNumber: FXA81L6
+        vaccinationDate: 12/01/2022
+    Citizen_cpf:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cpf:
+          type: string
+        fullName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        userRole:
+          type: string
+          enum:
+            - 'USUARIO'
+            - 'FUNCIONARIO'
+            - 'ADMIN'
+        cns:
+          type: string
+      example:
+        id: 1
+        cpf: 53649189046
+        fullName: Francisco Vicente Zappa
+        birthDate: 21/12/1940
+        cns: 318596810001714
+        vaccines:
+          id: 1
+          vaccine:
+            id: 1
+            vaccineName: BCG
+            manufacturer: Fundação Ataulpho de Paiva
+            manufactureDate: 15/11/2021
+            expirationDate: 119/02/2022
+            lotNumber: FXA81L6
+          vaccinationDate: 12/01/2022
+    PutCitizen:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cpf:
+          type: string
+        fullName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        userRole:
+          type: string
+          enum:
+            - 'USUARIO'
+            - 'FUNCIONARIO'
+            - 'ADMIN'
+        cns:
+          type: string
+      example:
+        id: 2
+        cpf: 62939733058
+        fullName: Dino Vicente da Silva Sauro
+        birthDate: 28/06/1999
+        cns: 640819871715964
+    Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cpf:
+          type: string
+        name:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        userole:
+          type: string
+          enum:
+            - 'FUNCIONARIO'
+            - 'ADMIN'
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        id: 1
+        cpf: 25117428021
+        name: Carlos Justiniano Ribeiro Chagas
+        email: cchagas@email.com
+        birthDate: 09/07/1979
+        userRole: ADMIN
+        healthCenter:
+    Employee_HealthCenter:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cpf:
+          type: string
+        name:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        userole:
+          type: string
+          enum:
+            - 'FUNCIONARIO'
+            - 'ADMIN'
+        email:
+          type: string
+        password:
+          type: string
+        healthCenter:
+          type: array
+          items:
+            $ref: "#/components/schemas/HealthCenter"
+      example:
+        id: 1
+        cpf: 25117428021
+        name: Carlos Justiniano Ribeiro Chagas
+        email: cchagas@email.com
+        birthDate: 09/07/1979
+        userRole: ADMIN
+        healthCenter:
+          id: 1
+          cnes: 2695464
+          name: Centro de Saúde Padre Eustáquio
+          city: Belo Horizonte
+          state: MG
+    EmployeeCpf:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cpf:
+          type: string
+        name:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        userole:
+          type: string
+          enum:
+            - 'FUNCIONARIO'
+            - 'ADMIN'
+        email:
+          type: string
+        password:
+          type: string
+        healthCenter:
+          type: array
+          items:
+            $ref: "#/components/schemas/HealthCenter"
+      example:
+        id: 1
+        cpf: 25117428021
+        name: Carlos Justiniano Ribeiro Chagas Junior
+        email: cchagas@email.com
+        birthDate: 09/07/1979
+        userRole: ADMIN
+        healthCenter:
+    HealthCenter:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cnes:
+          type: string
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          enum:
+            - 'AC'
+            - 'AL'
+            - 'AP'
+            - 'AM'
+            - 'BA'
+            - 'CE'
+            - 'DF'
+            - 'ES'
+            - 'GO'
+            - 'MA'
+            - 'MT'
+            - 'MS'
+            - 'MG'
+            - 'PA'
+            - 'PB'
+            - 'PR'
+            - 'PE'
+            - 'PI'
+            - 'RJ'
+            - 'RN'
+            - 'RS'
+            - 'RO'
+            - 'RR'
+            - 'SC'
+            - 'SP'
+            - 'SE'
+            - 'TO'
+      example:
+        id: 1
+        cnes: 2695464
+        name: Centro de Saúde Padre Eustáquio
+        city: Belo Horizonte
+        state: MG
+    PutHealthCenterCnes:
+      type: object
+      items:
+        $ref: "#/components/schemas/HealthCenter"
+      example:
+        id: 1
+        cnes: 2695464
+        name: Centro de Saúde Padre Eustáquio
+        city: Contagem
+        state: MG
+    HealtCenter_Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cnes:
+          type: string
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+          enum:
+            - 'AC'
+            - 'AL'
+            - 'AP'
+            - 'AM'
+            - 'BA'
+            - 'CE'
+            - 'DF'
+            - 'ES'
+            - 'GO'
+            - 'MA'
+            - 'MT'
+            - 'MS'
+            - 'MG'
+            - 'PA'
+            - 'PB'
+            - 'PR'
+            - 'PE'
+            - 'PI'
+            - 'RJ'
+            - 'RN'
+            - 'RS'
+            - 'RO'
+            - 'RR'
+            - 'SC'
+            - 'SP'
+            - 'SE'
+            - 'TO'
+        employee:
+          type: array
+          items:
+            $ref: "#/components/schemas/Employee"
+      example:
+        id: 1
+        cnes: 2695464
+        name: Centro de Saúde Padre Eustáquio
+        city: Contagem
+        state: MG
+        employee:
+          id: 1
+          cpf: 25117428021
+          name: Carlos Justiniano Ribeiro Chagas Junior
+          email: cchagas@email.com
+          birthDate: 09/07/1979
+          userRole: ADMIN
+    Vaccine:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vaccineName:
+          type: string
+          enum:
+            - 'BCG'
+            - 'HEPATITE B'
+            - 'PENTAVALENTE'
+            - 'POLIOMELITE'
+            - 'PNEUMOCÓCICA'
+            - 'ROTAVÍRUS'
+            - 'MENINGOCÓCICA_C'
+            - 'INFLUENZA'
+            - 'FEBRE_AMARELA'
+            - 'TRIPLICE_VIRAL'
+            - 'DTP'
+            - 'HEPATITE_A'
+            - 'TETRA_VIRAL'
+            - 'VARICELA_ATENUADA'
+            - 'HPV'
+            - 'DT'
+            - 'DTPA'
+            - 'PFIZER'
+            - 'CORONAVAC'
+            - 'JANSSEN'
+            - 'ASTRAZENECA'
+        manufacturer:
+          type: string
+        manufactureDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        lotNumber:
+          type: string
+      example:
+        id: 1
+        vaccineName: BCG
+        manufacturer: Fundação Ataulpho de Paiva
+        manufactureDate: 15/11/2021
+        expirationDate: 15/11/2021
+        lotNumber: FXA81L6
+    Vaccine_id:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        vaccineName:
+          type: string
+          enum:
+            - 'BCG'
+            - 'HEPATITE B'
+            - 'PENTAVALENTE'
+            - 'POLIOMELITE'
+            - 'PNEUMOCÓCICA'
+            - 'ROTAVÍRUS'
+            - 'MENINGOCÓCICA_C'
+            - 'INFLUENZA'
+            - 'FEBRE_AMARELA'
+            - 'TRIPLICE_VIRAL'
+            - 'DTP'
+            - 'HEPATITE_A'
+            - 'TETRA_VIRAL'
+            - 'VARICELA_ATENUADA'
+            - 'HPV'
+            - 'DT'
+            - 'DTPA'
+            - 'PFIZER'
+            - 'CORONAVAC'
+            - 'JANSSEN'
+            - 'ASTRAZENECA'
+        manufacturer:
+          type: string
+        manufactureDate:
+          type: string
+          format: date
+        expirationDate:
+          type: string
+          format: date
+        lotNumber:
+          type: string
+      example:
+        id: 1
+        vaccineName: BCG
+        manufacturer: Fundação Ataulpho de Paiva
+        manufactureDate: 15/11/2021
+        expirationDate: 15/02/2022
+        lotNumber: FXA81L6
+  securitySchemes:
+    login:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
