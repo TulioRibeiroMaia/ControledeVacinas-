@@ -93,12 +93,12 @@ public class CitizenServiceImpl implements CitizenService {
     }
 
     @Override
-    public CitizenDTO deleteCitizen(String cpf) {
+    public void deleteCitizen(String cpf) {
         Optional<Citizen> citizen = this.citizenRepository.findByCpf(cpf);
 
         if (citizen.isPresent()) {
             this.citizenRepository.deleteById(citizen.get().getId());
-            return modelMapper.map(citizen.get(), CitizenDTO.class);
+            return;
         }
 
         throw new ResourceNotFoundException("CPF " + cpf);

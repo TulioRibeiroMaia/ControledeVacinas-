@@ -80,8 +80,8 @@ public class CitizenController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{cpf}")
     @Transactional
-    public ResponseEntity<CitizenDTO> deleteCitizen(@PathVariable String cpf) {
-        CitizenDTO citizen = this.service.deleteCitizen(cpf);
-        return ResponseEntity.ok(citizen);
+    public ResponseEntity<?> deleteCitizen(@PathVariable String cpf) {
+        this.service.deleteCitizen(cpf);
+        return ResponseEntity.noContent().build();
     }
 }

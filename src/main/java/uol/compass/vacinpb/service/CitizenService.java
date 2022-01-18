@@ -19,7 +19,7 @@ public interface CitizenService {
 
     CitizenDTO updateCitizen(String cpf, CitizenFormDTO body);
 
-    CitizenDTO deleteCitizen(String cpf);
+    void deleteCitizen(String cpf);
 
     CitizenVaccinesDTO addVaccine(String cpf, CitizenVaccinesFormDTO body);
 

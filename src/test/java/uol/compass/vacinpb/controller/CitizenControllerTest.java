@@ -146,7 +146,7 @@ class CitizenControllerTest {
     @DisplayName("Deveria deletar um cidadão pelo seu CPF")
     public void shouldDeleteACitizenByTheirCpf() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/cidadaos/40040998037"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 }
 

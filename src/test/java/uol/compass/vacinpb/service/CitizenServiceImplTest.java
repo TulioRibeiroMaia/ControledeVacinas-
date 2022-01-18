@@ -116,9 +116,8 @@ class CitizenServiceImplTest {
     void deleteCitizenTest() {
         assertEquals(1, this.citizenService.getCitizens(null, null, null).size());
 
-        CitizenDTO citizen = this.citizenService.deleteCitizen("53649189046");
+        this.citizenService.deleteCitizen("53649189046");
 
-        assertEquals(1L, citizen.getId());
         assertEquals(0, this.citizenService.getCitizens(null, null, null).size());
     }
 
