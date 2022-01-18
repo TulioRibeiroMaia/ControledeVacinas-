@@ -79,15 +79,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDTO deleteEmployee(String cpf) {
+    public void deleteEmployee(String cpf) {
         Optional<Employee> employee = this.employeeRepository.findByCpf(cpf);
 
-        if (employee.isPresent()) {
-            this.employeeRepository.deleteById(employee.get().getId());
-            return modelMapper.map(employee.get(), EmployeeDTO.class);
+        if (!employee.isPresent()) {
+            throw new ResourceNotFoundException("CPF " + cpf);
         }
 
-        throw new ResourceNotFoundException("CPF " + cpf);
+        this.employeeRepository.deleteById(employee.get().getId());
     }
 
     @Override

@@ -69,8 +69,8 @@ public class EmployeeController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{cpf}")
     @Transactional
-    public ResponseEntity<EmployeeDTO> deleteEmployee(@PathVariable String cpf) {
-        EmployeeDTO employee = this.service.deleteEmployee(cpf);
-        return ResponseEntity.ok(employee);
+    public ResponseEntity<?> deleteEmployee(@PathVariable String cpf) {
+        this.service.deleteEmployee(cpf);
+        return ResponseEntity.noContent().build();
     }
 }

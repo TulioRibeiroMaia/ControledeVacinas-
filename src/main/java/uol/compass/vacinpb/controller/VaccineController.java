@@ -59,8 +59,8 @@ public class VaccineController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<VaccineDTO> deleteVaccine(@PathVariable Long id) {
-        VaccineDTO vaccine = this.service.deleteVaccine(id);
-        return ResponseEntity.ok(vaccine);
+    public ResponseEntity<?> deleteVaccine(@PathVariable Long id) {
+        this.service.deleteVaccine(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -102,9 +102,8 @@ class EmployeeServiceImplTest {
     void deleteEmployeeTest() {
         assertEquals(1, this.employeeService.getEmployees(null).size());
 
-        EmployeeDTO employee = this.employeeService.deleteEmployee("25117428021");
+        this.employeeService.deleteEmployee("25117428021");
 
-        assertEquals(1L, employee.getId());
         assertEquals(0, this.employeeService.getEmployees(null).size());
     }
 

@@ -4,8 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uol.compass.vacinpb.dto.VaccineDTO;
-import uol.compass.vacinpb.dto.VaccineDTO;
-import uol.compass.vacinpb.dto.form.VaccineFormDTO;
 import uol.compass.vacinpb.dto.form.VaccineFormDTO;
 import uol.compass.vacinpb.entity.Vaccine;
 import uol.compass.vacinpb.exception.ResourceNotFoundException;
@@ -80,14 +78,13 @@ public class VaccineServiceImpl implements VaccineService {
     }
 
     @Override
-    public VaccineDTO deleteVaccine(Long id) {
+    public void deleteVaccine(Long id) {
         Optional<Vaccine> vaccine = this.vaccineRepository.findById(id);
 
-        if (vaccine.isPresent()) {
-            this.vaccineRepository.deleteById(id);
-            return modelMapper.map(vaccine.get(), VaccineDTO.class);
+        if (!vaccine.isPresent()) {
+            throw new ResourceNotFoundException("ID " + id);
         }
 
-        throw new ResourceNotFoundException("ID " + id);
+        this.vaccineRepository.deleteById(id);
     }
 }

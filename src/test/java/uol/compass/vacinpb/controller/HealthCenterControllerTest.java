@@ -122,6 +122,6 @@ class HealthCenterControllerTest {
     @DisplayName("Deveria deletar um posto de saúde pelo seu CNES")
     public void shouldDeleteAnEmployeeByCpf() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/unidades/2695464"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 }

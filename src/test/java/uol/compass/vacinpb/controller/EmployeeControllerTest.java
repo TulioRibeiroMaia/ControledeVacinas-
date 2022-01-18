@@ -104,6 +104,6 @@ class EmployeeControllerTest {
     @DisplayName("Deveria deletar um funcionario pelo seu CPF")
     public void shouldDeleteAnEmployeeByCpf() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/funcionarios/25117428021"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 }

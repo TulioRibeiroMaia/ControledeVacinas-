@@ -96,12 +96,11 @@ public class CitizenServiceImpl implements CitizenService {
     public void deleteCitizen(String cpf) {
         Optional<Citizen> citizen = this.citizenRepository.findByCpf(cpf);
 
-        if (citizen.isPresent()) {
-            this.citizenRepository.deleteById(citizen.get().getId());
-            return;
+        if (!citizen.isPresent()) {
+            throw new ResourceNotFoundException("CPF " + cpf);
         }
 
-        throw new ResourceNotFoundException("CPF " + cpf);
+        this.citizenRepository.deleteById(citizen.get().getId());
     }
 
     @Override

@@ -106,6 +106,6 @@ class VaccineControllerTest {
     @DisplayName("Deveria deletar uma vacina pelo seu ID")
     public void shouldDeleteAVaccineById() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/vacinas/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 }

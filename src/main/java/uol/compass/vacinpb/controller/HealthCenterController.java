@@ -67,8 +67,8 @@ public class HealthCenterController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{cnes}")
     @Transactional
-    public ResponseEntity<HealthCenterDTO> deleteHealthCenter(@PathVariable String cnes) {
-        HealthCenterDTO healthCenter = this.service.deleteHealthCenter(cnes);
-        return ResponseEntity.ok(healthCenter);
+    public ResponseEntity<?> deleteHealthCenter(@PathVariable String cnes) {
+        this.service.deleteHealthCenter(cnes);
+        return ResponseEntity.noContent().build();
     }
 }

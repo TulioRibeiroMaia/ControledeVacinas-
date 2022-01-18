@@ -4,9 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uol.compass.vacinpb.dto.HealthCenterDTO;
-import uol.compass.vacinpb.dto.HealthCenterDTO;
 import uol.compass.vacinpb.dto.HealthCenterEmployeesDTO;
-import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.dto.form.HealthCenterFormDTO;
 import uol.compass.vacinpb.entity.HealthCenter;
 import uol.compass.vacinpb.enums.State;
@@ -82,15 +80,14 @@ public class HealthCenterServiceImpl implements HealthCenterService {
     }
 
     @Override
-    public HealthCenterDTO deleteHealthCenter(String cnes) {
+    public void deleteHealthCenter(String cnes) {
         Optional<HealthCenter> healthCenter = this.healthCenterRepository.findByCnes(cnes);
 
-        if (healthCenter.isPresent()) {
-            this.healthCenterRepository.deleteById(healthCenter.get().getId());
-            return modelMapper.map(healthCenter.get(), HealthCenterDTO.class);
+        if (!healthCenter.isPresent()) {
+            throw new ResourceNotFoundException("CNES " + cnes);
         }
 
-        throw new ResourceNotFoundException("CNES " + cnes);
+        this.healthCenterRepository.deleteById(healthCenter.get().getId());
     }
 
     @Override

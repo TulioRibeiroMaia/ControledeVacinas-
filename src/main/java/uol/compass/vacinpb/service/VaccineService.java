@@ -15,5 +15,5 @@ public interface VaccineService {
 
     VaccineDTO updateVaccine(Long id, VaccineFormDTO body);
 
-    VaccineDTO deleteVaccine(Long id);
+    void deleteVaccine(Long id);
 }

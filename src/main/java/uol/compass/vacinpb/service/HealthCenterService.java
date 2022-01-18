@@ -16,7 +16,7 @@ public interface HealthCenterService {
 
     HealthCenterDTO updateHealthCenter(String cnes, HealthCenterFormDTO body);
 
-    HealthCenterDTO deleteHealthCenter(String cnes);
+    void deleteHealthCenter(String cnes);
 
     HealthCenterEmployeesDTO listHealthCenterEmployees(String cnes);
 }

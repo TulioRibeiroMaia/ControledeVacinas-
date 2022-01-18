@@ -118,9 +118,8 @@ class VaccineServiceImplTest {
     void deleteVaccineTest() {
         assertEquals(1, this.vaccineService.getVaccines(null, null).size());
 
-        VaccineDTO vaccine = this.vaccineService.deleteVaccine(1L);
+        this.vaccineService.deleteVaccine(1L);
 
-        assertEquals(1L, vaccine.getId());
         assertEquals(0, this.vaccineService.getVaccines(null, null).size());
     }
 

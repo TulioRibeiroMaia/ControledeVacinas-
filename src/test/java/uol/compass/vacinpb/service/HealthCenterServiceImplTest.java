@@ -117,9 +117,8 @@ class HealthCenterServiceImplTest {
     void deleteHealthCenterTest() {
         assertEquals(1, this.hcService.getHealthCenters(null, null, null).size());
 
-        HealthCenterDTO healthCenter = this.hcService.deleteHealthCenter("2695464");
+        this.hcService.deleteHealthCenter("2695464");
 
-        assertEquals(1L, healthCenter.getId());
         assertEquals(0, this.hcService.getHealthCenters(null, null, null).size());
     }
 
