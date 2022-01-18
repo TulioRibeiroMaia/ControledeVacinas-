@@ -21,7 +21,6 @@ public class VaccineController {
     private VaccineService service;
 
     //cadastra novas vacinas
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @Transactional
     public ResponseEntity<VaccineDTO> saveVaccine(@RequestBody @Valid VaccineFormDTO body) {
@@ -30,7 +29,6 @@ public class VaccineController {
     }
 
     //lista as vacinas por nome e número do lote.
-    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping
     public ResponseEntity<List<VaccineDTO>> getVaccines(@RequestParam(name = "lote", required = false) String lotNumber,
                                                         @RequestParam(name = "ordenar-validade", required = false) Boolean sortExpDate) {
