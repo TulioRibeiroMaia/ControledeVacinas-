@@ -1,6 +1,7 @@
 -- citizens
 INSERT INTO citizen (cpf, full_name, birth_date, cns)
-VALUES ('53649189046', 'Francisco Vicente Zappa', '1940-12-21', '318596810001714'),
+VALUES
+       ('53649189046', 'Francisco Vicente Zappa', '1940-12-21', '318596810001714'),
        ('58855522078','Clara Lima','1935-7-4','453273100549719'),
        ('92230106163','Julian Ferreira','1967-1-18','548197705916758'),
        ('60218081693','Leila Martins','1935-2-4','555099678232085'),
@@ -386,13 +387,10 @@ VALUES ('53649189046', 'Francisco Vicente Zappa', '1940-12-21', '318596810001714
        ('98194090121','José Fernandes','1969-6-2','491693489800608'),
        ('30136606270','Emilly Fernandes','1939-12-12','544162484844779');
 
--- vaccines
-INSERT INTO vaccine (vaccine_name, manufacturer, manufacture_date, expiration_date, lot_number)
-VALUES ('BCG', 'Fundação Ataulpho de Paiva', '2021-11-15', '2022-02-19', 'FXA81L6');
-
 -- employees
 INSERT INTO employee (cpf, full_name, email, password, birth_date, user_role)
-VALUES ('25117428021', 'Carlos Justiniano Ribeiro Chagas', 'cchagas@email.com', '$2a$10$Tl0YlBZ5cKQwVs21yHxuN.cyfD5iO1wAwBgo/3ioogWO.lCjgX0.S', '1979-07-09', 'ADMIN'),
+VALUES
+       ('25117428021', 'Carlos Justiniano Ribeiro Chagas', 'cchagas@email.com', '$2a$10$Tl0YlBZ5cKQwVs21yHxuN.cyfD5iO1wAwBgo/3ioogWO.lCjgX0.S', '1979-07-09', 'ADMIN'),
        ('71926993730','Marcos Cunha','MarcosSilvaCunha@gustr.com','$2b$12$tTfeKnUqTV8urMyPexSpxuiDl.QRTbX34tsQTEEiDR5BO/JapSPiC','1988-12-2','FUNCIONARIO'),
        ('21738594718','Laura Silva','LauraBarrosSilva@fleckens.hu','$2b$12$s9u5PJPW2ZJEiSpJ6cPm.u4pkrWUZTvf5qhTKzyCVaS7PpQ4alwWy','1997-2-9','FUNCIONARIO'),
        ('34321939550','Otávio Azevedo','OtavioFerreiraAzevedo@fleckens.hu','$2b$12$VVyofd0ybYXWerTQPc4R9uD3oMriJTaID0lQ9zfuUvzeKKTIvzi46','1972-12-16','FUNCIONARIO'),
@@ -467,8 +465,86 @@ VALUES ('25117428021', 'Carlos Justiniano Ribeiro Chagas', 'cchagas@email.com', 
 
 -- health centers
 INSERT INTO health_center (cnes, name, city, state)
-VALUES ('2695464', 'Centro de Saúde Padre Eustáquio', 'Belo Horizonte', 'MG');
+VALUES
+       ('2695464', 'Centro de Saúde Padre Eustáquio', 'Belo Horizonte', 'MG'),
+       ('0023590','Centro de Saúde Andradas','Belo Horizonte','MG'),
+       ('0022640','Centro de Saúde Bairro das Indústrias','Belo Horizonte','MG'),
+       ('0023760','Centro de Saúde Betânia','Belo Horizonte','MG'),
+       ('2695766','Centro de Saúde Carlos Chagas','Belo Horizonte','MG'),
+       ('3451658','Centro de Saúde Carlos Prates','Belo Horizonte','MG'),
+       ('0023868','Centro de Saúde Dom Cabral','Belo Horizonte','MG'),
+       ('0023191','Centro de Saúde Dom Joaquim','Belo Horizonte','MG'),
+       ('2695421','Centro de Saúde Floramar','Belo Horizonte','MG'),
+       ('0023884','Centro de Saúde Glória','Belo Horizonte','MG'),
+       ('0022926','Centro de Saúde Horto','Belo Horizonte','MG'),
+       ('0023493','Centro de Saúde Itamarati','Belo Horizonte','MG'),
+       ('2695448','Centro de Saúde João Pinheiro','Belo Horizonte','MG'),
+       ('0023140','Centro de Saúde Maria Goretti','Belo Horizonte','MG'),
+       ('0024120','Centro de Saúde Nossa Senhora Aparecida','Belo Horizonte','MG'),
+       ('0024104','Centro de Saúde Nossa Senhora de Fátima','Belo Horizonte','MG'),
+       ('0024090','Centro de Saúde Oswaldo Cruz','Belo Horizonte','MG'),
+       ('2708310','Centro de Saúde Ouro Preto','Belo Horizonte','MG'),
+       ('5618312','Centro de Saúde Padre Joaquim Maia','Belo Horizonte','MG'),
+       ('0022764','Centro de Saúde Padre Tarcísio','Belo Horizonte','MG'),
+       ('0023957','Centro de Saúde Pedreira Prado Lopes','Belo Horizonte','MG'),
+       ('0022888','Centro de Saúde Pompeia','Belo Horizonte','MG'),
+       ('0023728','Centro de Saúde Primeiro de Maio','Belo Horizonte','MG'),
+       ('0023442','Centro de Saúde Salgado Filho','Belo Horizonte','MG'),
+       ('0023515','Centro de Saúde Santa Amélia','Belo Horizonte','MG'),
+       ('0022845','Centro de Saúde Santa Inês','Belo Horizonte','MG'),
+       ('0023558','Centro de Saúde Santa Terezinha','Belo Horizonte','MG'),
+       ('6368379','Centro de Saúde Santo Antonio','Belo Horizonte','MG'),
+       ('0023116','Centro de Saúde Sao Gabriel','Belo Horizonte','MG'),
+       ('0022853','Centro de Saúde Taquaril','Belo Horizonte','MG'),
+       ('0022624','Centro de Saúde Urucuia','Belo Horizonte','MG'),
+       ('3002446','Centro de Saúde Vera Cruz','Belo Horizonte','MG'),
+       ('0023418','Centro de Saúde Vista Alegre','Belo Horizonte','MG'),
+       ('0023361','Centro de Saúde Waldomiro Lobo','Belo Horizonte','MG'),
+       ('9166718','Centro de Saúde Zilah Spósito','Belo Horizonte','MG'),
+       ('9216162','Unidade de Atenção à Saúde Indígena de Belo Horizonte','Belo Horizonte','MG'),
+       ('0022683','Unidade de Pronto Atendimento Barreiro','Belo Horizonte','MG'),
+       ('6210902','Unidade de Pronto Atendimento Centro Sul','Belo Horizonte','MG'),
+       ('0027618','Unidade de Pronto Atendimento Leste','Belo Horizonte','MG'),
+       ('0023051','Unidade de Pronto Atendimento Nordeste','Belo Horizonte','MG'),
+       ('9068279','Unidade de Pronto Atendimento Noroeste','Belo Horizonte','MG'),
+       ('0023272','Unidade de Pronto Atendimento Norte','Belo Horizonte','MG'),
+       ('0023310','Unidade de Pronto Atendimento Oeste','Belo Horizonte','MG'),
+       ('2695111','Unidade de Pronto Atendimento Pampulha','Belo Horizonte','MG'),
+       ('0023582','Unidade de Pronto Atendimento Venda Nova','Belo Horizonte','MG');
 
--- extra
+-- vaccines
+INSERT INTO vaccine (vaccine_name, manufacturer, manufacture_date, expiration_date, lot_number)
+VALUES
+       ('BCG', 'Fundação Ataulpho de Paiva', '2021-11-15', '2022-02-19', 'FXA81L6'),
+       ('DTP', 'Fiocruz', '2020-08-23', '2021-2-25', 'OC715C91'),
+       ('TRIPLICE_VIRAL', 'CIBS', '2021-04-18', '2022-6-4', 'TD510H55'),
+       ('DT', 'Fiocruz', '2021-05-27', '2021-8-6', 'DM100A74'),
+       ('CORONAVAC', 'Instituto Butantan', '2021-07-28', '2022-8-24', 'CI456C99'),
+       ('VARICELA_ATENUADA', 'Novartis', '2020-10-19', '2021-8-9', 'NC960C32'),
+       ('MENINGOCOCICA_C', 'Fiocruz', '2020-08-12', '2021-12-11', 'VW550F34'),
+       ('ASTRAZENECA', 'Fiocruz', '2021-02-06', '2022-3-3', 'HJ864B26'),
+       ('MENINGOCOCICA_C', 'Novartis', '2020-03-02', '2021-9-11', 'TM265S37'),
+       ('MENINGOCOCICA_C', 'Novartis', '2021-11-09', '2021-5-19', 'MR585D68'),
+       ('VARICELA_ATENUADA', 'Novartis', '2021-09-30', '2021-7-13', 'SE048P34'),
+       ('ASTRAZENECA', 'Fiocruz', '2020-10-24', '2021-12-11', 'PG796G65'),
+       ('FEBRE_AMARELA', 'União Química', '2021-12-09', '2022-7-17', 'VR065R94'),
+       ('TETRA_VIRAL', 'União Química', '2021-12-18', '2022-1-20', 'UU745L95'),
+       ('HPV', 'Novartis', '2021-12-13', '2022-1-8', 'ND443J77'),
+       ('TETRA_VIRAL', 'CIBS', '2021-04-17', '2022-5-12', 'YB153W77'),
+       ('TETRA_VIRAL', 'CIBS', '2021-05-03', '2022-12-4', 'KS326I15'),
+       ('BCG', 'União Química', '2020-06-21', '2022-2-2', 'VN078S62'),
+       ('ASTRAZENECA', 'Fiocruz', '2020-08-16', '2023-1-31', 'MJ816N91'),
+       ('HEPATITE_B', 'Novartis', '2020-11-10', '2022-12-29', 'KN802D41'),
+       ('POLIOMELITE', 'Fiocruz', '2020-10-05', '2021-10-12', 'GU612S48'),
+       ('PFIZER', 'BioNTech', '2020-04-14', '2021-2-10', 'UC288T11'),
+       ('JANSSEN', 'Johnson & Johnson', '2021-09-14', '2021-9-10', 'WJ654K36'),
+       ('CORONAVAC', 'Instituto Butantan', '2021-05-25', '2021-3-29', 'XP205Y14'),
+       ('DTPA', 'Fiocruz', '2021-11-07', '2022-8-31', 'JT614D65'),
+       ('JANSSEN', 'Johnson & Johnson', '2021-01-25', '2022-10-8', 'QX339M36'),
+       ('ASTRAZENECA', 'Fiocruz', '2021-02-07', '2021-2-22', 'JW606B60'),
+       ('CORONAVAC', 'Instituto Butantan', '2021-07-23', '2021-2-21', 'HZ141I69'),
+       ('ROTAVIRUS', 'Fiocruz', '2021-01-05', '2021-8-17', 'MY038T73');
+
+-- extras
 INSERT INTO citizen_vaccines (vaccination_date, citizen_id, vaccine_id)
 VALUES ('1940-12-22', 1, 1);
