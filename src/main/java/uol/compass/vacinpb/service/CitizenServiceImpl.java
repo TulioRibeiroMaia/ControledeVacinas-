@@ -49,8 +49,12 @@ public class CitizenServiceImpl implements CitizenService {
 
         if (fullName != null) {
             citizens = this.citizenRepository.findByFullNameIgnoreCaseContaining(fullName);
-        } else if (startDate != null && endDate != null) {
-            citizens = this.citizenRepository.findByBirthDateBetween(startDate, endDate);
+        } else if (startDate != null) {
+            if (endDate != null) {
+                citizens = this.citizenRepository.findByBirthDateBetween(startDate, endDate);
+            } else {
+                citizens = this.citizenRepository.findByBirthDateBetween(startDate, LocalDate.now());
+            }
         } else {
             citizens = this.citizenRepository.findAll();
         }
