@@ -37,7 +37,6 @@ public class VaccineController {
     }
 
     //procura a vacina pelo id
-    @PreAuthorize("hasAnyRole('ADMIN','FUNCIONARIO')")
     @GetMapping("/{id}")
     public ResponseEntity<VaccineDTO> searchVaccine(@PathVariable Long id){
         VaccineDTO vaccine = this.service.searchVaccine(id);

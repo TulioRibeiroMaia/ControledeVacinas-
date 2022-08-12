@@ -52,7 +52,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/vacinas").permitAll()
                 .antMatchers(HttpMethod.GET, "/vacinas/{id}").permitAll()
                 .anyRequest().authenticated()
-                .and().csrf().disable()
+                .and().cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(new AuthenticationByTokenFilter(tokenService, employeeRepository), UsernamePasswordAuthenticationFilter.class);
     }
